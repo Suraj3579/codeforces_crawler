@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+
 URL = "https://www.imdb.com/list/ls057823854/"
 
 r = requests.get(URL)
