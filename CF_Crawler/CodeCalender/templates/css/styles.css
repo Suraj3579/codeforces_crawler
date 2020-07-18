@@ -1,0 +1,54 @@
+html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-size: 16px;
+    font-family: "Open Sans", "Oxygen", sans-serif;
+    color: #fff;
+  }
+  
+  #logo {
+    font-family: "fujita rey" "Raleway" sans-serif;
+    font-weight: 600;
+    color: #555;
+    font-size: 30px;
+    padding-left: 10px;
+    background: linear-gradient(to left, rgb(155, 252, 255), rgb(3, 53, 53));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+  }
+  
+  #nav-bar {
+    position: sticky;
+    z-index: 10;
+    top: 0px;
+    background-color:black;
+  }
+  
+
+.navbar-toggler {
+    border: none !important;
+  }
+  
+  .navbar {
+    color: #fff !important;
+  }
+  
+  .navbar-link {
+    font-weight: 600px;
+    color:white !important;
+  }
+
+  #nav-bar {
+    position: sticky;
+    z-index: 10;
+    top: 0px;
+    background-color:black;
+  }
+
+  .nav-link{
+      color: #fff !important;
+      font-size: 20px;
+  }
