@@ -9,5 +9,12 @@
 </head>
 <body>
     <h1>Code Calender Page</h1>
+    <div>
+        <ul>
+        {% for contest in contest_list %}
+        <li>{{ contest.name }}  --  {{ contest.startTimeSeconds }}</li>
+        {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>
