@@ -3,6 +3,8 @@ import urllib3
 import json
 
 
+
+
 # Create your views here.
 
 
@@ -17,3 +19,4 @@ def code_calender(request):
     #     print(cont)
     context = {'contest_list': contest_list}
     return render(request, 'calender.html', context)
+
