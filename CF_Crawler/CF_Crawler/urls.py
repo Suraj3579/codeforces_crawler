@@ -20,5 +20,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main_page, name='main_page'),
+    path('userhandle/', views.user_handle, name='userhandle'),
     path('CodeCalender/', include('CodeCalender.urls')),
 ]
