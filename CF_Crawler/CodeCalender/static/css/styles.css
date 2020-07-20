@@ -75,6 +75,23 @@ footer{
   font-weight: bold;
   margin-top: auto;
   padding: 15px;
+  position: sticky;
+}
+
+#userinfo img{
+  padding: 20px;
+  }
+
+#userinfo p{
+    padding-left: 25px;
+    font-weight: bold;
+    font-size: 25px;
+    padding-top: 5px;
+  }
+
+#userinfo h4{
+  font-weight: bold;
+  text-align: center;
 }
 
 
