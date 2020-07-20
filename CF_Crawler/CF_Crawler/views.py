@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import urllib3
 import json
-from .forms import UserHandle
+#from .forms import UserHandle
 from django.http import HttpResponseRedirect
 
 
