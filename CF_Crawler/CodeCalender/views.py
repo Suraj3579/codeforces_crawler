@@ -26,12 +26,4 @@ def code_calender(request):
     context = {'contest_list': contest_list, 'string': string, 'link_contest': link_contest}
     return render(request, 'calender.html', context)
 
-<<<<<<< HEAD
  
-=======
-# <<<<<<< HEAD
-# #to-do
-# #update links for upcoming contests
-# =======
-# >>>>>>> fc7a8bbeb9acd4a97407cb5f7c1416eb818a427d
->>>>>>> f7b912a1ebd9c72af65d695140f6ab62f1c3a1be
