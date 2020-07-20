@@ -3,7 +3,11 @@
     <div class = "calendercontent">
         <ul>
         {% for contest in contest_list %}
-        <li>{{ contest.name }}  --  {{ contest.startTimeSeconds }}</li>
+             
+            {% if contest.phase == string %}
+                 
+                 <a href={{ link_contest }}{{ contest.id }} target="_blank"><li>{{ contest.name }}  --  {{ contest.startTimeSeconds }}</li></a> 
+            {% endif %}
         {% endfor %}
         </ul>
     </div>
