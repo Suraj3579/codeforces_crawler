@@ -15,22 +15,17 @@ def user_handle(request):
     context1 = {}
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = UserHandle(request.POST)
+        form = request.POST['input_handle']
 
-        # check whether it's valid:
-        if form.is_valid():
-            text = form.cleaned_data['user_handle']
-            # process the data in form.cleaned_data as required
-            # ...
-            http = urllib3.PoolManager()
-            u = http.request('GET', 'https://codeforces.com/api/user.info?handles={0}'.format(text))
-            userinfo_list = json.loads(u.data.decode('utf-8'))
-            userinfo_list = userinfo_list["result"]
-            userinfo_list = userinfo_list["0"]
-            print(userinfo_list)
-            context1 = {'userinfo_list': userinfo_list}
-            # return HttpResponseRedirect('/userhandle')
+        http = urllib3.PoolManager()
+        u = http.request('GET', ('https://codeforces.com/api/user.info?handles='+form))
+        userinfo_list = json.loads(u.data.decode('utf-8'))
+        userinfo_list = userinfo_list["result"]
+        userinfo_list = userinfo_list[0]
+        print(userinfo_list)
+        context1 = {'userinfo_list': userinfo_list}
+        # return HttpResponseRedirect('/userhandle')
     else:
+        print("not found")
         form = UserHandle()
-
     return render(request, 'userinfo.html', context1)
