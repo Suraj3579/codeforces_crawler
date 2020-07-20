@@ -3,8 +3,6 @@ import urllib3
 import json
 
 
-
-
 # Create your views here.
 
 
@@ -17,13 +15,23 @@ def code_calender(request):
     contest_list = contest_list[:10]
     string = "BEFORE"
     link_contest = "https://codeforces.com/contests/"
-    #function for sorting according to start time
+
+    # function for sorting according to start time
     def fun(e):
         return e['startTimeSeconds']
+
     contest_list.sort(key=fun)
     # for cont in contest_list:
     #     print(cont)
-    context = {'contest_list': contest_list,'string':string,'link_contest':link_contest }
+    context = {'contest_list': contest_list, 'string': string, 'link_contest': link_contest}
     return render(request, 'calender.html', context)
 
+<<<<<<< HEAD
  
+=======
+# <<<<<<< HEAD
+# #to-do
+# #update links for upcoming contests
+# =======
+# >>>>>>> fc7a8bbeb9acd4a97407cb5f7c1416eb818a427d
+>>>>>>> f7b912a1ebd9c72af65d695140f6ab62f1c3a1be

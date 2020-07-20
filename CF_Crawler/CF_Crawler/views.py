@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import urllib3
 import json
-from .forms import UserHandle
+#from .forms import UserHandle
 from django.http import HttpResponseRedirect
 
 
@@ -15,22 +15,24 @@ def user_handle(request):
     context1 = {}
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = UserHandle(request.POST)
+        form = request.POST['input_handle']
 
-        # check whether it's valid:
-        if form.is_valid():
-            text = form.cleaned_data['user_handle']
-            # process the data in form.cleaned_data as required
-            # ...
-            http = urllib3.PoolManager()
-            u = http.request('GET', 'https://codeforces.com/api/user.info?handles={0}'.format(text))
-            userinfo_list = json.loads(u.data.decode('utf-8'))
+        http = urllib3.PoolManager()
+        u = http.request('GET', ('https://codeforces.com/api/user.info?handles='+form))
+        userinfo_list = json.loads(u.data.decode('utf-8'))
+        status=userinfo_list['status']
+        if status == 'OK':
+            print("user found")
+            status = True
             userinfo_list = userinfo_list["result"]
-            userinfo_list = userinfo_list["0"]
-            print(userinfo_list)
-            context1 = {'userinfo_list': userinfo_list}
-            # return HttpResponseRedirect('/userhandle')
+            userinfo_list = userinfo_list[0]
+        else:
+            print("user not found")
+            status = False
+            userinfo_list = userinfo_list['comment']
+            print("yoyo "+userinfo_list)
+        context1 = {'userinfo_list': userinfo_list, 'status': status}
+        # return HttpResponseRedirect('/userhandle')
     else:
         form = UserHandle()
-
     return render(request, 'userinfo.html', context1)

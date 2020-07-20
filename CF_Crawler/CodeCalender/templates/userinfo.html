@@ -1,5 +1,34 @@
 {% extends 'index.html'%}
 {% block content %}
-         <p>{{ userinfo_list.firstName }} {{ userinfo_list.organization }}</p>
-        <p>{{ userinfo_list.rating }}</p>
+    <section id="userinfo">
+    {% if status %}
+        <img src="{{ userinfo_list.avatar }}" height="230px" width="230px">
+        <p>{{ userinfo_list.handle }}</p>
+        <ul>
+        {% if userinfo_list.firstName%}
+            <li><h6>FirstName : {{ userinfo_list.firstName }}</h6></li>
+        {%endif%}
+        {% if userinfo_list.organization%}
+            <li><h6>Organisation : {{ userinfo_list.organization }}</h6></li>
+        {%endif%}
+        {% if userinfo_list.rating%}
+            <li><h6>Rating : {{ userinfo_list.rating }}</h6></li>
+        {%endif%}
+        {% if userinfo_list.rank%}
+            <li><h6>Rank : {{ userinfo_list.rank }}</h6></li>
+        {%endif%}
+        {% if userinfo_list.maxRating%}
+            <li><h6>MaxRating : {{ userinfo_list.maxRating }}</h6></li>
+        {%endif%}
+        {% if userinfo_list.maxRank%}
+            <li><h6>MaxRank : {{ userinfo_list.maxRank }}</h6></li>
+        {%endif%}
+        {% if userinfo_list.friendOfCount%}
+            <li><h6>Friends : {{ userinfo_list.friendOfCount }}</h6></li>
+        {%endif%}
+        </ul>
+    {% else %}
+        <h4>User Not Found</h4>
+    {% endif %}
+    </section>
 {% endblock %}

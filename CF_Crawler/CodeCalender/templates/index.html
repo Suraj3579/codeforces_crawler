@@ -31,13 +31,13 @@
           <nav class="navbar navbar-dark">
             <form class="form-inline" method = "post" action = "{% url 'userhandle' %}">
               {% csrf_token %}
-              {{ form }}
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              
+              <input class="form-control mr-sm-2" type="search" name="input_handle" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
           </nav>
           <li class="nav-item">
-            <a class="nav-link" href="#contactimg">Contact</a>
+            <a class="nav-link" href="#contactimg">Contact Us</a>
           </li>
         </ul>
       </div>
