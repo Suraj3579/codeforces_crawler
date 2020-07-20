@@ -1,5 +1,12 @@
 {% extends 'index.html'%}
 {% block content %}
-         <p>{{ userinfo_list.firstName }} {{ userinfo_list.organization }}</p>
+    {% if status %}
+        <p>user found</p>
+        <img src="{{ userinfo_list.avatar }}" height="200px" width="200px">
+        <p>{{ userinfo_list.firstName }}</p>
+        <p>{{ userinfo_list.organization }}</p>
         <p>{{ userinfo_list.rating }}</p>
+    {% else %}
+        <p>{{ userinfo_list }}</p>
+    {% endif %}
 {% endblock %}
