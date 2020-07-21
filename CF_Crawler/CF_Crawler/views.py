@@ -19,7 +19,14 @@ def user_handle(request):
 
         http = urllib3.PoolManager()
         u = http.request('GET', ('https://codeforces.com/api/user.info?handles='+form))
+        v = http.request('GET',('https://codeforces.com/api/user.status?handle='+form))
         userinfo_list = json.loads(u.data.decode('utf-8'))
+        usersubmission_list=json.loads(v.data.decode('utf-8'))
+        
+        ## all submitted questions
+        submit_ques = usersubmission_list['result']
+        ## all accepted ques list 
+        
         status=userinfo_list['status']
         if status == 'OK':
             print("user found")
@@ -31,7 +38,8 @@ def user_handle(request):
             status = False
             userinfo_list = userinfo_list['comment']
             print("yoyo "+userinfo_list)
-        context1 = {'userinfo_list': userinfo_list, 'status': status}
+        context1 = {'userinfo_list': userinfo_list, 'status': status
+         }
         # return HttpResponseRedirect('/userhandle')
     else:
         form = UserHandle()
