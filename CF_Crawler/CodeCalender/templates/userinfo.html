@@ -40,14 +40,16 @@
     <div id ="myChart">
     <script>
         var SubmissionData = {
-            type : "pie",
-            legend: {
-
-            },
+            type : "pie3d",
+            
             plot: {
                 tooltip: {
-                text: "%t<br>%v"
-                }
+                text: "%t<br>%npv%<br>%v"
+                },
+               
+                 
+                //to order pie slices by size and have reference angle start at zero.
+ 
             },
             title : {
             text : "Submissions"
@@ -72,14 +74,15 @@
     <div id="myChart1">
     <script>
         var LangData = {
-            type : "pie",
+            type : "pie3d",
             legend: {
 
             },
             plot: {
                 tooltip: {
-                text: "%t<br>%v"
-                }
+                text: "%t<br>%npv%<br>%v"
+                },
+                
             },
             title : {
             text : "Languages"
