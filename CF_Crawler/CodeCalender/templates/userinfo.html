@@ -1,6 +1,11 @@
 {% extends 'index.html'%}
 {% block content %}
+{% load tag %}
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
     <section id="userinfo">
+    <div class = "container">
+    <div class = "row">
+    <div class = 'col-md-4'>
     {% if status %}
         <img src="{{ userinfo_list.avatar }}" height="230px" width="230px">
         <p>{{ userinfo_list.handle }}</p>
@@ -30,5 +35,192 @@
     {% else %}
         <h4>User Not Found</h4>
     {% endif %}
+    </div>
+    <div class = 'col-md-8'>
+    <div id ="myChart">
+    <script>
+        var SubmissionData = {
+            type : "pie",
+            legend: {
+
+            },
+            plot: {
+                tooltip: {
+                text: "%t<br>%v"
+                }
+            },
+            title : {
+            text : "Submissions"
+            },
+            series: [
+                    {% for tag in tagcount %}
+                    {% get_count tagcount tag as lol %}
+                    { values: {{lol}}, text : "{{tag}}"} {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+            ]
+
+        }
+
+        zingchart.render({
+            id: 'myChart',
+            data: SubmissionData,
+        });
+    </script>
+    </div>
+    
+    
+    <div id="myChart1">
+    <script>
+        var LangData = {
+            type : "pie",
+            legend: {
+
+            },
+            plot: {
+                tooltip: {
+                text: "%t<br>%v"
+                }
+            },
+            title : {
+            text : "Languages"
+            },
+            series: [
+                    {% for l in langcount %}
+                    {% get_count langcount l as lil %}
+                    { values: {{lil}}, text : "{{l}}"} {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+            ]
+
+        }
+
+        zingchart.render({
+            id: 'myChart1',
+            data: LangData,
+        });
+        </script>
+    </div>
+
+    <div id="myChart2">
+    <script>
+        var Ratinggraph = {
+            "type": "line",
+            
+            "title": {
+                "text": "Rating",
+                "font-size": "24px",
+                "adjust-layout": true
+            },
+            "plotarea": {
+                "margin": "dynamic 45 60 dynamic",
+            },
+            "legend": {
+                "layout": "float",
+                "background-color": "none",
+                "border-width": 0,
+                "shadow": 0,
+                "align": "center",
+                "adjust-layout": true,
+                "toggle-action": "remove",
+                "item": {
+                "padding": 7,
+                "marginRight": 17,
+                "cursor": "hand"
+                }
+            },
+            "scale-x": {
+                "labels": "{{dtime}}" ,
+                "label": { /* Add a scale title with a label object. */
+                    "text": "Dates"
+                        }
+            },
+
+            "scale-y": {
+                "line-color": "#f6f7f8",
+                "shadow": 0,
+                "guide": {
+                "line-style": "dashed"
+                },
+                "label": {
+                "text": "Rating",
+                },
+                "minor-ticks": 0,
+                "thousands-separator": ","
+            },
+            "crosshair-x": {
+                "line-color": "#efefef",
+                "plot-label": {
+                "border-radius": "5px",
+                "border-width": "1px",
+                "border-color": "#f6f7f8",
+                "padding": "10px",
+                "font-weight": "bold"
+                },
+                "scale-label": {
+                "font-color": "#000",
+                "background-color": "#f6f7f8",
+                "border-radius": "5px"
+                }
+            },
+            "tooltip": {
+                "visible": false
+            },
+            "plot": {
+                "highlight": true,
+                "tooltip-text": "%t views: %v<br>%k",
+                "shadow": 0,
+                "line-width": "2px",
+                "marker": {
+                "type": "circle",
+                "size": 3
+                },
+                "highlight-state": {
+                "line-width": 3
+                },
+                "animation": {
+                "effect": 1,
+                "sequence": 2,
+                "speed": 100,
+                }
+            },
+            "series": [{
+                "values": {{rating}} ,
+                "text": "Rating",
+                "line-color": "#007790",
+                "legend-item": {
+                    "background-color": "#007790",
+                    "borderRadius": 5,
+                    "font-color": "white"
+                },
+                "legend-marker": {
+                    "visible": false
+                },
+                "marker": {
+                    "background-color": "#007790",
+                    "border-width": 1,
+                    "shadow": 0,
+                    "border-color": "#69dbf1"
+                },
+                "highlight-marker": {
+                    "size": 6,
+                    "background-color": "#007790",
+                }
+                
+                },
+            ]
+            };
+            
+            zingchart.render({
+            id: 'myChart2',
+            data: Ratinggraph,
+            
+            });
+    </script>
+    </div>
+         
+    
+    </div>
+    
+    </div>
+    </div>
     </section>
 {% endblock %}

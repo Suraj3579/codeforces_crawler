@@ -93,5 +93,7 @@ footer{
   font-weight: bold;
   text-align: center;
 }
-
+.container{
+  display: inline;
+}
 
