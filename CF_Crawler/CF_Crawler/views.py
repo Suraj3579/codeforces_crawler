@@ -2,6 +2,7 @@ from django.shortcuts import render
 import urllib3
 import json
 from collections import Counter
+from datetime import datetime
 #from .forms import UserHandle
 from django.http import HttpResponseRedirect
 
@@ -35,6 +36,8 @@ def user_handle(request):
         
         tag=[]
         lang=[]
+        tags=[]
+        tagval=[]
         http = urllib3.PoolManager()
         u = http.request('GET', 'https://codeforces.com/api/user.status?handle='+ form)
         useranalysis = json.loads(u.data.decode('utf-8'))
@@ -43,13 +46,35 @@ def user_handle(request):
             tag.extend(item['problem']['tags'])
 
         tagcount=Counter(tag)
-
+        for item in tagcount:
+            tags.append(item)
+        print(tags)
+        for tv in tagcount:
+            tagval.append(tagcount[tv])
+        print(tagval)
         for item in useranalysis:
             lang.append(item['programmingLanguage'])    
 
         langcount=Counter(lang)
+        rating =[]
+        rtime = []
+        rank=[]
+        http = urllib3.PoolManager()
+        u = http.request('GET', 'https://codeforces.com/api/user.rating?handle='+ form)
+        useranalysis3 = json.loads(u.data.decode('utf-8'))
+        useranalysis3 = useranalysis3["result"] 
+        for item in useranalysis3:
+            rating.append(item['newRating'])
+
+        for item in useranalysis3:
+            rtime.append(item['ratingUpdateTimeSeconds'])
+        dtime=[]
+        for i in rtime:
+            dtime.append(datetime.fromtimestamp(i).strftime("%d %b'%y"))
         
-        context1 = {'userinfo_list': userinfo_list, 'status': status,'tagcount':tagcount,'langcount':langcount}
+        print(dtime)
+        context1 = {'userinfo_list': userinfo_list, 'status': status,'tagval':tagval,
+        'langcount':langcount,'tags':tags,'dtime':dtime, 'rating':rating}
         # return HttpResponseRedirect('/userhandle')
     else:
         form = UserHandle()
