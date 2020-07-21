@@ -20,9 +20,9 @@ def user_handle(request):
         form = request.POST['input_handle']
 
         http = urllib3.PoolManager()
-        u = http.request('GET', ('https://codeforces.com/api/user.info?handles='+form))
+        u = http.request('GET', ('https://codeforces.com/api/user.info?handles=' + form))
         userinfo_list = json.loads(u.data.decode('utf-8'))
-        status=userinfo_list['status']
+        status = userinfo_list['status']
         if status == 'OK':
             print("user found")
             status = True
@@ -32,28 +32,25 @@ def user_handle(request):
             print("user not found")
             status = False
             userinfo_list = userinfo_list['comment']
-            print("yoyo "+userinfo_list)
-        
-        tag=[]
-        lang=[]
-        tags=[]
-        tagval=[]
+            print("yoyo " + userinfo_list)
+
+        tag = []
+        lang = []
         http = urllib3.PoolManager()
-        u = http.request('GET', 'https://codeforces.com/api/user.status?handle='+ form)
+        u = http.request('GET', 'https://codeforces.com/api/user.status?handle=' + form)
         useranalysis = json.loads(u.data.decode('utf-8'))
         useranalysis = useranalysis["result"]
         for item in useranalysis:
             tag.extend(item['problem']['tags'])
 
-        tagcount=Counter(tag)
-        for item in tagcount:
-            tags.append(item)
-        print(tags)
-        for tv in tagcount:
-            tagval.append(tagcount[tv])
-        print(tagval)
+        tagcount = Counter(tag)
+        # print(tagcount)
+        # for x in tagcount:
+        #     print(x, tagcount[x])
         for item in useranalysis:
-            lang.append(item['programmingLanguage'])    
+            lang.append(item['programmingLanguage'])
+
+        langcount = Counter(lang)
 
         langcount=Counter(lang)
         rating =[]
@@ -73,8 +70,7 @@ def user_handle(request):
             dtime.append(datetime.fromtimestamp(i).strftime("%d %b'%y"))
         
         print(dtime)
-        context1 = {'userinfo_list': userinfo_list, 'status': status,'tagval':tagval,
-        'langcount':langcount,'tags':tags,'dtime':dtime, 'rating':rating}
+        context1 = {'userinfo_list': userinfo_list, 'status': status,'langcount':langcount,'dtime':dtime, 'rating':rating}
         # return HttpResponseRedirect('/userhandle')
     else:
         form = UserHandle()

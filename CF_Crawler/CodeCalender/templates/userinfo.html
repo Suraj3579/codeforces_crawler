@@ -1,5 +1,6 @@
 {% extends 'index.html'%}
 {% block content %}
+{% load tag %}
     <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
     <section id="userinfo">
     <div class = "container">
@@ -52,8 +53,9 @@
             text : "Submissions"
             },
             series: [
-                    {% for val in tagval %}
-                    { values: [{{val}}], text : "{{tag}}"} {% if not forloop.last %},{% endif %}
+                    {% for tag in tagcount %}
+                    {% get_count tagcount tag as lol %}
+                    { values: {{lol}}, text : "{{tag}}"} {% if not forloop.last %},{% endif %}
                     {% endfor %}
             ]
 
@@ -84,7 +86,8 @@
             },
             series: [
                     {% for l in langcount %}
-                    { values: [{{l.attribute}}], text : "{{l}}"} {% if not forloop.last %},{% endif %}
+                    {% get_count langcount l as lil %}
+                    { values: {{lil}}, text : "{{l}}"} {% if not forloop.last %},{% endif %}
                     {% endfor %}
             ]
 
