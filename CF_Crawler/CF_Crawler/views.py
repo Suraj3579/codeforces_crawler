@@ -2,7 +2,7 @@ from django.shortcuts import render
 import urllib3
 import json
 from collections import Counter
-#from .forms import UserHandle
+# from .forms import UserHandle
 from django.http import HttpResponseRedirect
 
 
@@ -19,9 +19,9 @@ def user_handle(request):
         form = request.POST['input_handle']
 
         http = urllib3.PoolManager()
-        u = http.request('GET', ('https://codeforces.com/api/user.info?handles='+form))
+        u = http.request('GET', ('https://codeforces.com/api/user.info?handles=' + form))
         userinfo_list = json.loads(u.data.decode('utf-8'))
-        status=userinfo_list['status']
+        status = userinfo_list['status']
         if status == 'OK':
             print("user found")
             status = True
@@ -31,25 +31,27 @@ def user_handle(request):
             print("user not found")
             status = False
             userinfo_list = userinfo_list['comment']
-            print("yoyo "+userinfo_list)
-        
-        tag=[]
-        lang=[]
+            print("yoyo " + userinfo_list)
+
+        tag = []
+        lang = []
         http = urllib3.PoolManager()
-        u = http.request('GET', 'https://codeforces.com/api/user.status?handle='+ form)
+        u = http.request('GET', 'https://codeforces.com/api/user.status?handle=' + form)
         useranalysis = json.loads(u.data.decode('utf-8'))
         useranalysis = useranalysis["result"]
         for item in useranalysis:
             tag.extend(item['problem']['tags'])
 
-        tagcount=Counter(tag)
-
+        tagcount = Counter(tag)
+        # print(tagcount)
+        # for x in tagcount:
+        #     print(x, tagcount[x])
         for item in useranalysis:
-            lang.append(item['programmingLanguage'])    
+            lang.append(item['programmingLanguage'])
 
-        langcount=Counter(lang)
-        
-        context1 = {'userinfo_list': userinfo_list, 'status': status,'tagcount':tagcount,'langcount':langcount}
+        langcount = Counter(lang)
+
+        context1 = {'userinfo_list': userinfo_list, 'status': status, 'tagcount': tagcount, 'langcount': langcount}
         # return HttpResponseRedirect('/userhandle')
     else:
         form = UserHandle()
