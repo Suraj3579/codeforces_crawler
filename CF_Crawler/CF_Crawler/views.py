@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import urllib3
 import json
+from collections import Counter
 #from .forms import UserHandle
 from django.http import HttpResponseRedirect
 
@@ -31,7 +32,24 @@ def user_handle(request):
             status = False
             userinfo_list = userinfo_list['comment']
             print("yoyo "+userinfo_list)
-        context1 = {'userinfo_list': userinfo_list, 'status': status}
+        
+        tag=[]
+        lang=[]
+        http = urllib3.PoolManager()
+        u = http.request('GET', 'https://codeforces.com/api/user.status?handle='+ form)
+        useranalysis = json.loads(u.data.decode('utf-8'))
+        useranalysis = useranalysis["result"]
+        for item in useranalysis:
+            tag.extend(item['problem']['tags'])
+
+        tagcount=Counter(tag)
+
+        for item in useranalysis:
+            lang.append(item['programmingLanguage'])    
+
+        langcount=Counter(lang)
+        
+        context1 = {'userinfo_list': userinfo_list, 'status': status,'tagcount':tagcount,'langcount':langcount}
         # return HttpResponseRedirect('/userhandle')
     else:
         form = UserHandle()

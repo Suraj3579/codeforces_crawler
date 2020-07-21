@@ -1,6 +1,10 @@
 {% extends 'index.html'%}
 {% block content %}
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
     <section id="userinfo">
+    <div class = "container">
+    <div class = "row">
+    <div class = 'col-md-4'>
     {% if status %}
         <img src="{{ userinfo_list.avatar }}" height="230px" width="230px">
         <p>{{ userinfo_list.handle }}</p>
@@ -30,5 +34,72 @@
     {% else %}
         <h4>User Not Found</h4>
     {% endif %}
+    </div>
+    <div class = 'col-md-8'>
+    <div id ="myChart">
+    <script>
+        var SubmissionData = {
+            type : "pie",
+            legend: {
+
+            },
+            plot: {
+                tooltip: {
+                text: "%t<br>%v"
+                }
+            },
+            title : {
+            text : "Submissions"
+            },
+            series: [
+                    {% for tag in tagcount %}
+                    { values: [{{tag.attribute}}], text : "{{tag}}"} {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+            ]
+
+        }
+
+        zingchart.render({
+            id: 'myChart',
+            data: SubmissionData,
+        });
+    </script>
+    </div>
+    
+    
+    <div id="myChart1">
+    <script>
+        var LangData = {
+            type : "pie",
+            legend: {
+
+            },
+            plot: {
+                tooltip: {
+                text: "%t<br>%v"
+                }
+            },
+            title : {
+            text : "Languages"
+            },
+            series: [
+                    {% for l in langcount %}
+                    { values: [{{l.attribute}}], text : "{{l}}"} {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+            ]
+
+        }
+
+        zingchart.render({
+            id: 'myChart1',
+            data: LangData,
+        });
+        </script>
+    </div>
+    
+    </div>
+    
+    </div>
+    </div>
     </section>
 {% endblock %}
