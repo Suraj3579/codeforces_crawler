@@ -70,7 +70,7 @@ def user_handle(request):
             dtime.append(datetime.fromtimestamp(i).strftime("%d %b'%y"))
         
         print(dtime)
-        context1 = {'userinfo_list': userinfo_list, 'status': status,'langcount':langcount,'dtime':dtime, 'rating':rating}
+        context1 = {'userinfo_list': userinfo_list, 'status': status,'tagcount': tagcount,'langcount':langcount,'dtime':dtime, 'rating':rating}
         # return HttpResponseRedirect('/userhandle')
     else:
         form = UserHandle()
