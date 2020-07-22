@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 
 def main_page(request):
     context = {}
-    return render(request, 'index.html', context)
+    return render(request, 'home.html', context)
 
 
 def user_handle(request):
