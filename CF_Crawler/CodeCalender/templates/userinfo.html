@@ -226,13 +226,36 @@
                 plotarea: {
                     'adjust-layout': true
                 },
+                "title": {
+                    "text": "No. Of Problems Solved vs Problem Level",
+                    "font-color": "#8993c7",
+                    "backgroundColor": "none",
+                    "font-size": "22px",
+                    "alpha": 1,
+                    "adjust-layout": true,
+                },
+                "plot": {
+                    "bars-space-left": 0.15,
+                    "bars-space-right": 0.15,
+                    "animation": {
+                        "effect": "ANIMATION_SLIDE_BOTTOM",
+                        "sequence": 0,
+                        "speed": 800,
+                        "delay": 800
+                    }
+                },
                 'scale-x': {
                     label: { /* Scale Title */
-                        text: "Here is a category scale",
+                        text: "Problem Levels",
                     },
                      labels: [{% for x in ABC_tagcount %}
                      "{{x}}" {% if not forloop.last %},{% endif %}
                      {% endfor %}]
+                },
+                'scale-y': {
+                    label: {
+                        text: "No. of Problems"
+                    }
                 },
                 series: [
                 {
@@ -240,7 +263,8 @@
                         {% get_ABC_count ABC_tagcount l as yoyo %}
                         {{yoyo}} {% if not forloop.last %},{% endif %}
                         {% endfor %}
-                    ]
+                    ],
+                    "background-color": "#8993c7"
                 }]
             }
             zingchart.render({
@@ -252,16 +276,39 @@
             <script>
             var problem_rating_data={
                 type: 'bar',
+                "title": {
+                    "text": "No. Of Problems Solved vs Problem Rating",
+                    "font-color": "#2da4cc",
+                    "backgroundColor": "none",
+                    "font-size": "22px",
+                    "alpha": 1,
+                    "adjust-layout": true,
+                },
                 plotarea: {
                     'adjust-layout': true
                 },
+                "plot": {
+                    "bars-space-left": 0.15,
+                    "bars-space-right": 0.15,
+                    "animation": {
+                        "effect": "ANIMATION_SLIDE_BOTTOM",
+                        "sequence": 0,
+                        "speed": 800,
+                        "delay": 800
+                    }
+                },
                 'scale-x': {
                     label: { /* Scale Title */
-                        text: "Here is a category scale",
+                        text: "Problems Rating",
                     },
                      labels: [{% for x in problem_ratingcount %}
                      "{{x}}" {% if not forloop.last %},{% endif %}
                      {% endfor %}]
+                },
+                'scale-y': {
+                    label: {
+                        text: "No. of Problems"
+                    }
                 },
                 series: [
                 {
