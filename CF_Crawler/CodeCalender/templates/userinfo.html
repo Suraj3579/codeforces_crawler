@@ -31,6 +31,11 @@
         {% if userinfo_list.friendOfCount%}
             <li><h6>Friends : {{ userinfo_list.friendOfCount }}</h6></li>
         {%endif%}
+            <li><h6>Contests Participated : {{data_dict.noc}}</h6></li>
+            <li><h6>Total Submissions : {{data_dict.ts}}</h6></li>
+            <li><h6>Successful Submissions : {{data_dict.ss}}</h6></li>
+            <li><h6>Maximum Submissions for a Single Question : {{data_dict.msqn}} ({{data_dict.msqc}})</h6></li>
+            <li><h6>Successful Questions with one Submission : {{data_dict.nqos}}</h6></li>
         </ul>
     {% else %}
         <h4>User Not Found</h4>
@@ -323,6 +328,38 @@
             id: 'problem_rating_bar',
             data: problem_rating_data,});
             </script>
+        </div>
+
+        <div id="myChart5">
+        <script>
+            var LangData = {
+                type : "pie3d",
+                legend: {
+
+                },
+                plot: {
+                    tooltip: {
+                    text: "%t<br>%npv%<br>%v"
+                    },
+                    
+                },
+                title : {
+                text : "Verdict of the Submissions"
+                },
+                series: [
+                        {% for v in verdict_count %}
+                        {% get_vcount verdict_count v as vil %}
+                        { values: {{vil}}, text : "{{v}}"} {% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                ]
+
+            }
+
+            zingchart.render({
+                id: 'myChart5',
+                data: LangData,
+            });
+        </script>
         </div>
          
     

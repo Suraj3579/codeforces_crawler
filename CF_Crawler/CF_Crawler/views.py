@@ -38,6 +38,11 @@ def user_handle(request):
         lang = []
         ABC_tag = []
         problem_rating = []
+        verdicts=[]
+        contestids=[]
+        quests=[]
+        okquests=[]
+        nqos=0 #no of successful questions in one submission
         http = urllib3.PoolManager()
         u = http.request('GET', 'https://codeforces.com/api/user.status?handle=' + form)
         user_analysis = json.loads(u.data.decode('utf-8'))
@@ -58,6 +63,31 @@ def user_handle(request):
         langcount = Counter(lang)
         ABC_tagcount = Counter(ABC_tag)
         problem_ratingcount = Counter(problem_rating)
+
+        for item in user_analysis:
+            verdicts.append(item["verdict"])
+        for item in user_analysis:
+            if(item["author"]["participantType"]=='CONTESTANT'):
+                contestids.append(item["contestId"])
+        for item in user_analysis:
+            quests.append(item["problem"]["name"])
+        for item in user_analysis:
+            if(item["verdict"]=="OK"):
+                okquests.append(item["problem"]["name"])
+        verdict_count=Counter(verdicts)
+        contest_count=Counter(contestids)
+        ques_count=Counter(quests)
+        okques_count=Counter(okquests)
+        for key in okques_count:
+            if(okques_count[key]==1):
+                nqos+=1
+        noc=len(contest_count) #no of contests participated
+        ts=(len(user_analysis))  #total submissions
+        ss=(verdict_count['OK']) #successful submissions
+        msqn = max(ques_count.keys(), key=(lambda k: ques_count[k])) #name of the question with maximum submissions
+        msqc=ques_count[msqn] #max submissions per question
+        data_dict={'msqn':msqn,'msqc':msqc,'nqos':nqos,'ts':ts,'ss':ss,'noc':noc}
+
         rating = []
         rtime = []
         rank = []
@@ -78,7 +108,7 @@ def user_handle(request):
         context1 = {'userinfo_list': userinfo_list, 'status': status,
                     'tagcount': tagcount, 'langcount': langcount, 'ABC_tagcount': ABC_tagcount,
                     'problem_ratingcount': problem_ratingcount,
-                    'dtime': dtime, 'rating': rating}
+                    'dtime': dtime, 'rating': rating, 'verdict_count':verdict_count, 'data_dict':data_dict}
         # return HttpResponseRedirect('/userhandle')
     else:
         form = UserHandle()
