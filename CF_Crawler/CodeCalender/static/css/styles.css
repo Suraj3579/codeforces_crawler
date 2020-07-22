@@ -1,3 +1,4 @@
+
 html {
     scroll-behavior: smooth;
     height: 100%;
@@ -117,5 +118,33 @@ footer{
 
 .clink:hover{
  text-decoration:none;
+}
+
+
+#contactimg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url( '/static/img/im2.jpg' );
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #efefef;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.fa {
+  height: 50px;
+  width: 50px;
+}
+
+.block button {
+  color: #efefef;
+  background-color: rgb(66, 140, 250);
+  border-radius: 16px;
+  margin-top: 15px;
+}
+
+.block {
+  padding: 10px;
 }
 
