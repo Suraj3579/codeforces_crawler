@@ -3,7 +3,7 @@ import urllib3
 import json
 from collections import Counter
 from datetime import datetime
-#from .forms import UserHandle
+# from .forms import UserHandle
 from django.http import HttpResponseRedirect
 
 
@@ -55,8 +55,19 @@ def user_handle(request):
             for item in useranalysis:
                 if item['verdict']=='OK':
                     ok_submissions.append(item['creationTimeSeconds'])
-            print(ok_submissions)
-            #---------------
+            dates=[]
+            for item in ok_submissions:
+                timestamp = datetime.fromtimestamp(item)
+                dates.append(timestamp.strftime('%Y-%m-%d'))
+            datecount=Counter(dates)
+            datefreq=[]
+            for date in datecount:
+                list=[]
+                list.append(date)
+                list.append(datecount[date])
+                datefreq.append(list)
+            print(datefreq)
+            #--------------
             #rating
             rating =[]
             rtime = []
@@ -75,7 +86,8 @@ def user_handle(request):
                 dtime.append(datetime.fromtimestamp(i).strftime("%d %b'%y"))
             
             #   print(dtime)
-            context1 = {'userinfo_list': userinfo_list, 'status': status,'tagcount': tagcount,'langcount':langcount,'dtime':dtime, 'rating':rating,'verdictcount':verdictcount}
+            context1 = {'userinfo_list': userinfo_list, 'status': status,'tagcount': tagcount,'langcount':langcount,'dtime':dtime, 'rating':rating,'verdictcount':verdictcount,'datecount':datecount ,
+            'datefreq':json.dumps(datefreq),'ok_count': len( ok_submissions)}
             # return HttpResponseRedirect('/userhandle')
     else:
         form = UserHandle()
