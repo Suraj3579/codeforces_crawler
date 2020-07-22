@@ -14,3 +14,9 @@ def convert_time(time_stamp):
 def get_count(tagcount,tag):
     out = [tagcount[tag]]
     return out
+
+
+@register.simple_tag
+def get_ABC_count(tagcount,tag):
+    out = [tagcount[tag]]
+    return out[0]

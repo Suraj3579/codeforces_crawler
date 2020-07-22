@@ -3,7 +3,7 @@ import urllib3
 import json
 from collections import Counter
 from datetime import datetime
-#from .forms import UserHandle
+# from .forms import UserHandle
 from django.http import HttpResponseRedirect
 
 
@@ -32,45 +32,53 @@ def user_handle(request):
             print("user not found")
             status = False
             userinfo_list = userinfo_list['comment']
-            print("yoyo " + userinfo_list)
+            # print("yoyo " + userinfo_list)
 
         tag = []
         lang = []
+        ABC_tag = []
+        problem_rating = []
         http = urllib3.PoolManager()
         u = http.request('GET', 'https://codeforces.com/api/user.status?handle=' + form)
-        useranalysis = json.loads(u.data.decode('utf-8'))
-        useranalysis = useranalysis["result"]
-        for item in useranalysis:
-            tag.extend(item['problem']['tags'])
+        user_analysis = json.loads(u.data.decode('utf-8'))
+        user_analysis = user_analysis["result"]
+        temp = set()
+        for x in user_analysis:
+            if x['id'] not in temp and x['verdict'] == 'OK':
+                temp.add(x['id'])
+                tag.extend(x['problem']['tags'])
+                lang.append(x['programmingLanguage'])
+                ABC_tag.append(x['problem']['index'][0])
+                # print(x['problem']['name'])
+                problem_rating.append(x['problem']['rating'])
 
+        problem_rating = sorted(problem_rating)
+        ABC_tag = sorted(ABC_tag)
         tagcount = Counter(tag)
-        # print(tagcount)
-        # for x in tagcount:
-        #     print(x, tagcount[x])
-        for item in useranalysis:
-            lang.append(item['programmingLanguage'])
-
         langcount = Counter(lang)
-
-        langcount=Counter(lang)
-        rating =[]
+        ABC_tagcount = Counter(ABC_tag)
+        problem_ratingcount = Counter(problem_rating)
+        rating = []
         rtime = []
-        rank=[]
+        rank = []
         http = urllib3.PoolManager()
-        u = http.request('GET', 'https://codeforces.com/api/user.rating?handle='+ form)
+        u = http.request('GET', 'https://codeforces.com/api/user.rating?handle=' + form)
         useranalysis3 = json.loads(u.data.decode('utf-8'))
-        useranalysis3 = useranalysis3["result"] 
+        useranalysis3 = useranalysis3["result"]
         for item in useranalysis3:
             rating.append(item['newRating'])
 
         for item in useranalysis3:
             rtime.append(item['ratingUpdateTimeSeconds'])
-        dtime=[]
+        dtime = []
         for i in rtime:
             dtime.append(datetime.fromtimestamp(i).strftime("%d %b'%y"))
-        
+
         print(dtime)
-        context1 = {'userinfo_list': userinfo_list, 'status': status,'tagcount': tagcount,'langcount':langcount,'dtime':dtime, 'rating':rating}
+        context1 = {'userinfo_list': userinfo_list, 'status': status,
+                    'tagcount': tagcount, 'langcount': langcount, 'ABC_tagcount': ABC_tagcount,
+                    'problem_ratingcount': problem_ratingcount,
+                    'dtime': dtime, 'rating': rating}
         # return HttpResponseRedirect('/userhandle')
     else:
         form = UserHandle()

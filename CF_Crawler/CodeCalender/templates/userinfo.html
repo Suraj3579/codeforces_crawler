@@ -219,6 +219,64 @@
             });
     </script>
     </div>
+        <div id="ABC_tag_bar">
+            <script>
+            var ABC_tag_data={
+                type: 'bar',
+                plotarea: {
+                    'adjust-layout': true
+                },
+                'scale-x': {
+                    label: { /* Scale Title */
+                        text: "Here is a category scale",
+                    },
+                     labels: [{% for x in ABC_tagcount %}
+                     "{{x}}" {% if not forloop.last %},{% endif %}
+                     {% endfor %}]
+                },
+                series: [
+                {
+                    values:[{% for l in ABC_tagcount %}
+                        {% get_ABC_count ABC_tagcount l as yoyo %}
+                        {{yoyo}} {% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    ]
+                }]
+            }
+            zingchart.render({
+            id: 'ABC_tag_bar',
+            data: ABC_tag_data,});
+            </script>
+        </div>
+        <div id="problem_rating_bar">
+            <script>
+            var problem_rating_data={
+                type: 'bar',
+                plotarea: {
+                    'adjust-layout': true
+                },
+                'scale-x': {
+                    label: { /* Scale Title */
+                        text: "Here is a category scale",
+                    },
+                     labels: [{% for x in problem_ratingcount %}
+                     "{{x}}" {% if not forloop.last %},{% endif %}
+                     {% endfor %}]
+                },
+                series: [
+                {
+                    values:[{% for l in problem_ratingcount %}
+                        {% get_ABC_count problem_ratingcount l as yoyo %}
+                        {{yoyo}} {% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    ]
+                }]
+            }
+            zingchart.render({
+            id: 'problem_rating_bar',
+            data: problem_rating_data,});
+            </script>
+        </div>
          
     
     </div>
