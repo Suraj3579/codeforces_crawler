@@ -1,15 +1,33 @@
 {% extends 'index.html'%}
 {% block content %}
 {% load tag %}
-    <div class = "calendercontent">
-        <ul>
+    <div class="container" >
+        <!--<ul class="yoyo_ul">-->
+        <table class="table table-bordered table-striped ctable">
+                <thead class="thead dark">
+                   <tr>
+                    <th>Contest Name</th>
+                    <th>Contest Time</th>
+                   </tr>
+                </thead>
+            <tbody>
         {% for contest in contest_list %}
              
             {% if contest.phase == string %}
                  {% convert_time contest.startTimeSeconds as contest_time %}
-                 <a href={{ link_contest }}{{ contest.id }} target="_blank"><li>{{ contest.name }}  --  {{ contest_time }}</li></a>
+
+                <tr>
+                    <td class="cname"><a href={{ link_contest }}{{ contest.id }} target="_blank" class="clink">{{ contest.name }}</a></td>
+                    <td class="ctime">{{ contest_time }}</td>
+                </tr>
+
+                 <!--<a href={{ link_contest }}{{ contest.id }} target="_blank">
+                     <li class="yoyo_li">{{ contest.name }}  --  {{ contest_time }}</li>
+                 </a>-->
             {% endif %}
         {% endfor %}
-        </ul>
+            </tbody>
+        </table>
+        <!--</ul>-->
     </div>
 {% endblock %}

@@ -63,10 +63,10 @@ html {
     color: rgb(59, 156, 30) !important;
 }
 
-.calendercontent li{
+/*.calendercontent li{
   font-weight: bold;
   padding: 10px;
-}
+}*/
 
 footer{
   color: white;
@@ -87,13 +87,35 @@ footer{
     font-weight: bold;
     font-size: 25px;
     padding-top: 5px;
-  }
+   }
 
 #userinfo h4{
-  font-weight: bold;
-  text-align: center;
+    font-weight: bold;
+    text-align: center;
 }
 .container{
-  display: inline;
+    display: inline;
+    margin: auto;
+}
+
+.ctable{
+   margin: auto;
+   border-collapse: separate;
+}
+
+.cname{
+    padding: 5px 10px 5px 10px;
+    }
+
+.ctime{
+    padding: 5px 10px 5px 10px;
+}
+
+.clink{
+    color: #28a745;
+}
+
+.clink:hover{
+ text-decoration:none;
 }
 

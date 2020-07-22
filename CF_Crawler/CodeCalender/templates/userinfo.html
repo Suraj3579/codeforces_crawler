@@ -32,6 +32,11 @@
         {% if userinfo_list.friendOfCount%}
             <li><h6>Friends : {{ userinfo_list.friendOfCount }}</h6></li>
         {%endif%}
+            <li><h6>Contests Participated : {{data_dict.noc}}</h6></li>
+            <li><h6>Total Submissions : {{data_dict.ts}}</h6></li>
+            <li><h6>Successful Submissions : {{data_dict.ss}}</h6></li>
+            <li><h6>Maximum Submissions for a Single Question : {{data_dict.msqn}} ({{data_dict.msqc}})</h6></li>
+            <li><h6>Successful Questions with one Submission : {{data_dict.nqos}}</h6></li>
         </ul>
     
     </div>
@@ -223,37 +228,7 @@
     
 
 
-    <div id="myChart3">
-    <script>
-        var VerdictData = {
-            type : "pie3d",
-            legend: {
-    
-            },
-            plot: {
-                tooltip: {
-                text: "%t<br>%npv%<br>%v"
-                },
-                
-            },
-            title : {
-            text : "Verditcts"
-            },
-            series: [
-                    {% for v in verdictcount %}
-                    {% get_count  verdictcount v as vil %}
-                    { values: {{vil}}, text : "{{v}}"} {% if not forloop.last %},{% endif %}
-                    {% endfor %}
-            ]
-    
-        }
-    
-        zingchart.render({
-            id: 'myChart3',
-            data: VerdictData,
-        });
-        </script>
-    </div>
+  
     <div id="heatmap">
         <script>
         var myConfig = {
@@ -385,7 +360,143 @@
         </script>
     </div>
     
-  
+    <div id="ABC_tag_bar">
+        <script>
+        var ABC_tag_data={
+            type: 'bar',
+            plotarea: {
+                'adjust-layout': false
+            },
+            "title": {
+                "text": "No. Of Problems Solved vs Problem Level",
+                "font-color": "#8993c7",
+                "backgroundColor": "none",
+                "font-size": "22px",
+                "alpha": 1,
+                "adjust-layout": false,
+            },
+            "plot": {
+                "bars-space-left": 0.15,
+                "bars-space-right": 0.15,
+                "animation": {
+                    "effect": "ANIMATION_SLIDE_BOTTOM",
+                    "sequence": 0,
+                    "speed": 800,
+                    "delay": 800
+                }
+            },
+            'scale-x': {
+                label: { /* Scale Title */
+                    text: "Problem Levels",
+                },
+                 labels: [{% for x in ABC_tagcount %}
+                 "{{x}}" {% if not forloop.last %},{% endif %}
+                 {% endfor %}]
+            },
+            'scale-y': {
+                label: {
+                    text: "No. of Problems"
+                }
+            },
+            series: [
+            {
+                values:[{% for l in ABC_tagcount %}
+                    {% get_ABC_count ABC_tagcount l as yoyo %}
+                    {{yoyo}} {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                ],
+                "background-color": "#8993c7"
+            }]
+        }
+        zingchart.render({
+        id: 'ABC_tag_bar',
+        data: ABC_tag_data,});
+        </script>
+    </div>
+    <div id="problem_rating_bar">
+        <script>
+        var problem_rating_data={
+            type: 'bar',
+            "title": {
+                "text": "No. Of Problems Solved vs Problem Rating",
+                "font-color": "#2da4cc",
+                "backgroundColor": "none",
+                "font-size": "22px",
+                "alpha": 1,
+                "adjust-layout": true,
+            },
+            plotarea: {
+                'adjust-layout': true
+            },
+            "plot": {
+                "bars-space-left": 0.15,
+                "bars-space-right": 0.15,
+                "animation": {
+                    "effect": "ANIMATION_SLIDE_BOTTOM",
+                    "sequence": 0,
+                    "speed": 800,
+                    "delay": 800
+                }
+            },
+            'scale-x': {
+                label: { /* Scale Title */
+                    text: "Problems Rating",
+                },
+                 labels: [{% for x in problem_ratingcount %}
+                 "{{x}}" {% if not forloop.last %},{% endif %}
+                 {% endfor %}]
+            },
+            'scale-y': {
+                label: {
+                    text: "No. of Problems"
+                }
+            },
+            series: [
+            {
+                values:[{% for l in problem_ratingcount %}
+                    {% get_ABC_count problem_ratingcount l as yoyo %}
+                    {{yoyo}} {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                ]
+            }]
+        }
+        zingchart.render({
+        id: 'problem_rating_bar',
+        data: problem_rating_data,});
+        </script>
+    </div>
+
+    <div id="myChart5">
+    <script>
+        var LangData = {
+            type : "pie3d",
+            legend: {
+
+            },
+            plot: {
+                tooltip: {
+                text: "%t<br>%npv%<br>%v"
+                },
+                
+            },
+            title : {
+            text : "Verdict of the Submissions"
+            },
+            series: [
+                    {% for v in verdict_count %}
+                    {% get_vcount verdict_count v as vil %}
+                    { values: {{vil}}, text : "{{v}}"} {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+            ]
+
+        }
+
+        zingchart.render({
+            id: 'myChart5',
+            data: LangData,
+        });
+    </script>
+    </div>
   
 
 

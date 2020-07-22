@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main_page, name='main_page'),
     path('userhandle/', views.user_handle, name='userhandle'),
+    path('contactus/', views.contact, name='contact'),
     path('CodeCalender/', include('CodeCalender.urls')),
 ]
