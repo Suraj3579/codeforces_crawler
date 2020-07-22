@@ -5,6 +5,8 @@ from collections import Counter
 from datetime import datetime
 # from .forms import UserHandle
 from django.http import HttpResponseRedirect
+from .forms import query_form
+from .models import Query
 
 
 def main_page(request):
@@ -14,7 +16,27 @@ def main_page(request):
 
 def contact(request):
     context = {}
-    return render(request, 'contact.html', context)
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = query_form(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            tem = Query()
+            tem.query_subject = form.cleaned_data['query_subject']
+            tem.query_text = form.cleaned_data['query_text']
+            tem.user_name = form.cleaned_data['user_name']
+            tem.user_email = form.cleaned_data['user_email']
+            tem.save()
+            # redirect to a new URL:
+            return HttpResponseRedirect('/contactus/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = query_form()
+
+    return render(request, 'contact.html', {'form': form})
 
 
 def user_handle(request):
@@ -38,8 +60,8 @@ def user_handle(request):
             status = True
             userinfo_list = userinfo_list["result"]
             userinfo_list = userinfo_list[0]
-            
-            #---------code for anylasis page
+
+            # ---------code for anylasis page
             tag = []
             lang = []
             ABC_tag = []
@@ -81,25 +103,25 @@ def user_handle(request):
                 if (item["verdict"] == "OK"):
                     okquests.append(item["problem"]["name"])
 
-            #---calendar section----------
+            # ---calendar section----------
             ok_submissions = []
-            count=0
+            count = 0
             for item in user_analysis:
-                if item['verdict']=='OK':
+                if item['verdict'] == 'OK':
                     ok_submissions.append(item['creationTimeSeconds'])
-            dates=[]
+            dates = []
             for item in ok_submissions:
                 timestamp = datetime.fromtimestamp(item)
                 dates.append(timestamp.strftime('%Y-%m-%d'))
-            datecount=Counter(dates)
-            datefreq=[]
+            datecount = Counter(dates)
+            datefreq = []
             for date in datecount:
-                list=[]
+                list = []
                 list.append(date)
                 list.append(datecount[date])
                 datefreq.append(list)
             print(datefreq)
-            #----end---------# 
+            # ----end---------#
             verdict_count = Counter(verdicts)
             contest_count = Counter(contestids)
             ques_count = Counter(quests)
@@ -110,7 +132,8 @@ def user_handle(request):
             noc = len(contest_count)  # no of contests participated
             ts = (len(user_analysis))  # total submissions
             ss = (verdict_count['OK'])  # successful submissions
-            msqn = max(ques_count.keys(), key=(lambda k: ques_count[k]))  # name of the question with maximum submissions
+            msqn = max(ques_count.keys(),
+                       key=(lambda k: ques_count[k]))  # name of the question with maximum submissions
             msqc = ques_count[msqn]  # max submissions per question
             data_dict = {'msqn': msqn, 'msqc': msqc, 'nqos': nqos, 'ts': ts, 'ss': ss, 'noc': noc}
 
@@ -129,13 +152,13 @@ def user_handle(request):
             dtime = []
             for i in rtime:
                 dtime.append(datetime.fromtimestamp(i).strftime("%d %b'%y"))
-            
+
             print(dtime)
             context1 = {'userinfo_list': userinfo_list, 'status': status,
                         'tagcount': tagcount, 'langcount': langcount, 'ABC_tagcount': ABC_tagcount,
                         'problem_ratingcount': problem_ratingcount,
                         'dtime': dtime, 'rating': rating, 'verdict_count': verdict_count, 'data_dict': data_dict,
-                        'datecount':datecount ,'ok_count': len( ok_submissions)}
+                        'datecount': datecount, 'ok_count': len(ok_submissions)}
             # return HttpResponseRedirect('/userhandle')
     else:
         form = UserHandle()
