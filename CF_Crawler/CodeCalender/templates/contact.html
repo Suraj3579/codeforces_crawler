@@ -1,0 +1,162 @@
+{% extends 'index.html' %}
+{%block content%}
+{% load static %}
+<main class="flex-shrink-0 mt-3">
+
+
+
+    <div class="container">
+        <h1 class="text-center my-2"><b>Web-Developers</b></h1>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 my-2">
+                <div class="card" style="width: 18rem;margin:auto;">
+                    <img src="{% static 'img/boruto.png' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text">Lead Developer<br><a href="https://www.iitg.ac.in/stud/gymkhana/technical/home/CodingHome.html" target="_blank">Coding Club IITG</a></p>
+                        <!--a href="#" class="btn btn-primary">Go somewhere</a-->
+                    </div>
+                </div>
+            </div>
+
+             <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 my-2">
+                <div class="card" style="width: 18rem;margin:auto;">
+                    <img src="{% static 'img/boruto.png' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Chandan</h5>
+                        <p class="card-text">Web-Coordinator<br>SAIL</p>
+                        <!--a href="#" class="btn btn-primary">Go somewhere</a-->
+                    </div>
+                </div>
+            </div>
+
+             <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 my-2">
+                <div class="card" style="width: 18rem;margin:auto;">
+                    <img src="{% static 'img/boruto.png' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Suraj</h5>
+                        <p class="card-text">Web-Developer<br>SAIL</p>
+                        <!--a href="#" class="btn btn-primary">Go somewhere</a-->
+                    </div>
+                </div>
+            </div>
+
+             <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 my-2">
+                <div class="card" style="width: 18rem;margin:auto;">
+                    <img src="{% static 'img/boruto.png' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Chinmai Anandh</h5>
+                        <p class="card-text">Web-Executive<br>SAIL</p>
+                        <!--a href="#" class="btn btn-primary">Go somewhere</a-->
+                    </div>
+                </div>
+            </div>
+
+             <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 my-2">
+                <div class="card" style="width: 18rem;margin:auto;">
+                    <img src="{% static 'img/boruto.png' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Jaya Prakash</h5>
+                        <p class="card-text">Web-Executive<br>SAIL</p>
+                        <!--a href="#" class="btn btn-primary">Go somewhere</a-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            <section id="contactimg">
+              <section id="global-header">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="block">
+                        <h1>Help Us Develop!</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section id="contact-form">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="block">
+                        <form method="post">
+                    
+                    {% csrf_token %}
+
+   
+
+                  {% for hidden_field in form.hidden_fields %}
+                    {% if hidden_field.errors %}
+                      <ul>
+                        {% for error in hidden_field.errors %}
+                          <li>(Hidden field {{ hidden_field.name }}) {{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                    {{ hidden_field }}
+                  {% endfor %}
+
+                  
+                    {% for field in form.visible_fields %}
+                      <div class="form-group">
+                          {{ field }}
+                      </div>    
+                    {% endfor %}
+                  <button type="submit" class="btn btn-default">Submit</button>
+                  </form>
+                </div>
+                </div>
+                
+                
+                <div class="col-md-6 col-sm-12">
+                    <div class="block">
+                    <h2>Mail Us!</h2>
+                        <h6>Email:</h6>
+                        <ul class="address-block">
+                        <li>k.surajraj9@gmail.com</li>
+                        <li>anandh@gmail.com</li>
+                        <li>jp@gmail.com</li>
+                        <li>chandan@gmail.com</li>
+                        <li>vikyath@gmail.com</li>
+                        </ul>
+                                  
+                    <h2>Find us here!</h2>
+                    <div class="row">
+                    <div class="col-md-3">
+                        <a href=""><i class="fa-2x fa fa-linkedin"></i></a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href=""><i class="fa fa-2x fa-facebook"></i></a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href=""><i class="fa fa-2x fa-github"></i></a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href=""><i class="fas fa-2x fa-map-marker-alt"></i></a>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            
+            </section>
+            </section>
+
+             <!--div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 my-2">
+                <div class="card" style="width: 18rem;">
+                    <img src="/yearbook/static/img/sail_logo.png" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div-->
+      
+
+
+    </main>
+{%endblock%}

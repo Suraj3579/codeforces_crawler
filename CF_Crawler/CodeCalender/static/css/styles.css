@@ -1,3 +1,4 @@
+
 html {
     scroll-behavior: smooth;
     height: 100%;
@@ -63,10 +64,10 @@ html {
     color: rgb(59, 156, 30) !important;
 }
 
-.calendercontent li{
+/*.calendercontent li{
   font-weight: bold;
   padding: 10px;
-}
+}*/
 
 footer{
   color: white;
@@ -87,13 +88,64 @@ footer{
     font-weight: bold;
     font-size: 25px;
     padding-top: 5px;
-  }
+   }
 
 #userinfo h4{
-  font-weight: bold;
-  text-align: center;
+    font-weight: bold;
+    text-align: center;
 }
 .container{
-  display: inline;
+    display: inline;
+    margin: auto;
+}
+
+.ctable{
+   margin: auto;
+   border-collapse: separate;
+}
+
+.cname{
+    padding: 5px 10px 5px 10px;
+    }
+
+.ctime{
+    padding: 5px 10px 5px 10px;
+}
+
+.clink{
+    color: #28a745;
+}
+
+.clink:hover{
+ text-decoration:none;
+}
+
+
+#contactimg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url( '/static/img/im2.jpg' );
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #efefef;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.fa {
+  height: 50px;
+  width: 50px;
+}
+
+.block button {
+  color: #efefef;
+  background-color: rgb(66, 140, 250);
+  border-radius: 16px;
+  margin-top: 15px;
+}
+
+.block {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 

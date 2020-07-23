@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+import socket
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'CodeCalender.apps.CodeCalenderConfig',
+    'CF_Crawler',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,10 @@ STATIC_URL = '/static/'
 #     os.path.join(BASE_DIR, "CF_Crawler/static"),
 #     os.path.join(BASE_DIR, "CF_Crawler"),
 # ]
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'CodeCrawler906@gmail.com'
+EMAIL_HOST_PASSWORD = 'scvbbutfhvupddrq'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False

@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
   <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>website_index</title>
   </head>
@@ -36,7 +38,7 @@
             </form>
           </nav>
           <li class="nav-item">
-            <a class="nav-link" href="#contactimg">Contact Us</a>
+            <a class="nav-link" href="/contactus">Contact Us</a>
           </li>
         </ul>
       </div>
@@ -45,8 +47,15 @@
   {% block content%}
   {% endblock %}
   <footer>
+    {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+
+        {% endfor %}
+
+    {% endif %}
     <h4>Developed and Maintained by </h4>
-    <h6>* Anandh * Suraj * JP * Vikyath *</h6>
+    <h6> <a href="https://github.com/chinmaianandh" target="_blank">Anandh</a> ,<a href="https://github.com/Suraj3579" target="_blank">Suraj</a> , <a href="https://github.com/jayaprakashjp12" target="_blank">JP</a> , <a href="https://github.com/chandan-git-04" target="_blank">Chandan</a> , Vikyath </h6>
   </footer>
   </body>
 </html>

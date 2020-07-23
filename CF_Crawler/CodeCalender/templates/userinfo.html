@@ -1,7 +1,8 @@
 {% extends 'index.html'%}
 {% block content %}
 {% load tag %}
-    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+{% load static %}
+    <script src=" {% static '/js/zingchart.min.js' %}"></script>
     <section id="userinfo">
     <div class = "container">
     <div class = "row">
@@ -27,27 +28,32 @@
         {%endif%}
         {% if userinfo_list.maxRank%}
             <li><h6>MaxRank : {{ userinfo_list.maxRank }}</h6></li>
-        {%endif%}
+        {%endif%} 
         {% if userinfo_list.friendOfCount%}
             <li><h6>Friends : {{ userinfo_list.friendOfCount }}</h6></li>
         {%endif%}
+            <li><h6>Contests Participated : {{data_dict.noc}}</h6></li>
+            <li><h6>Total Submissions : {{data_dict.ts}}</h6></li>
+            <li><h6>Successful Submissions : {{data_dict.ss}}</h6></li>
+            <li><h6>Maximum Submissions for a Single Question : {{data_dict.msqn}} ({{data_dict.msqc}})</h6></li>
+            <li><h6>Successful Questions with one Submission : {{data_dict.nqos}}</h6></li>
         </ul>
-    {% else %}
-        <h4>User Not Found</h4>
-    {% endif %}
+    
     </div>
     <div class = 'col-md-8'>
     <div id ="myChart">
     <script>
         var SubmissionData = {
-            type : "pie",
-            legend: {
-
-            },
+            type : "pie3d",
+            
             plot: {
                 tooltip: {
-                text: "%t<br>%v"
-                }
+                text: "%t<br>%npv%<br>%v"
+                },
+               
+                 
+                //to order pie slices by size and have reference angle start at zero.
+ 
             },
             title : {
             text : "Submissions"
@@ -59,7 +65,7 @@
                     {% endfor %}
             ]
 
-        }
+        } 
 
         zingchart.render({
             id: 'myChart',
@@ -72,14 +78,15 @@
     <div id="myChart1">
     <script>
         var LangData = {
-            type : "pie",
+            type : "pie3d",
             legend: {
 
             },
             plot: {
                 tooltip: {
-                text: "%t<br>%v"
-                }
+                text: "%t<br>%npv%<br>%v"
+                },
+                
             },
             title : {
             text : "Languages"
@@ -99,6 +106,8 @@
         });
         </script>
     </div>
+
+  
 
     <div id="myChart2">
     <script>
@@ -216,8 +225,296 @@
             });
     </script>
     </div>
-         
     
+
+
+  
+    <div id="heatmap">
+        <script>
+        var myConfig = {
+        type: 'calendar',
+        options: {
+          year: {
+            text: '2020',
+            visible: true
+          },
+          startMonth: 1,
+          endMonth: 7,
+          palette: ['none', '#2196F3'],
+          month: {
+            item: {
+              fontColor: 'gray',
+              fontSize: 9
+            }
+          },
+          weekday: {
+            values: ['', 'M', '', 'W', '', 'F', ''],
+            item: {
+              fontColor: 'gray',
+              fontSize: 9
+            }
+          },
+          values:[
+              {% for date in datecount %}
+              {% date_count datecount date as lil %}
+              [ '{{ date }}',{{lil}} ]    ,
+              {%endfor%}
+          ]
+        },
+        labels: [{ //Lefthand Label (container portion)
+            borderColor: 'gray',
+            borderWidth: 1,
+            x: '8%',
+            y: '60%',
+            width: '40%',
+            height: '30%'
+          },
+          { //Lefthand Label (top portion)
+            text: 'Daily Contribution',
+            fontColor: '#212121',
+            textAlign: 'center',
+            x: '10%',
+            y: '65%',
+            width: '36%'
+          },
+          { //Lefthand Label (middle portion)
+            text: '%plot-value',
+            fontColor: '#2196F3',
+            fontFamily: 'Georgia',
+            fontSize: 35,
+            textAlign: 'center',
+            x: '10%',
+            y: '68%',
+            width: '36%'
+          },
+          // Note: the bottom portion of the Bottom-Left Label is the fixed tooltip, below.
+       
+          { //Rightside Label (container portion)
+            borderColor: 'gray',
+            borderWidth: 1,
+            x: '52%',
+            y: '60%',
+            width: '40%',
+            height: '30%',
+          },
+          { //Rightside Label (top portion)
+            text: 'Total accepted Submissions ',
+            fontColor: '#212121',
+            textAlign: 'center',
+            x: '54%',
+            y: '65%',
+            width: '36%'
+          },
+          { //Rightside Label (middle portion)
+            text: '{{ok_count}}',
+            fontColor: '#2196F3',
+            fontFamily: 'Georgia',
+            fontSize: 35,
+            textAlign: 'center',
+            x: '54%',
+            y: '68%',
+            width: '36%'
+          },
+          { //Rightside Label (bottom portion)
+            text: 'Jan 1 - Jun 30',
+            fontColor: '#212121',
+            padding: 2,
+            textAlign: 'center',
+            x: '54%',
+            y: '80%',
+            width: '36%'
+          }
+        ],
+       
+        tooltip: { //Lefthand Label (bottom portion)
+          text: '%data-day',
+          backgroundColor: 'none',
+          borderColor: 'none',
+          fontColor: '#212121',
+          padding: 2,
+          //textAlign: 'center',
+          align: 'center',
+          sticky: true,
+          timeout: 30000,
+          x: '10%',
+          y: '80%',
+          width: '36%'
+        },
+       
+        plotarea: {
+          marginTop: '15%',
+          marginBottom: '55%',
+          marginLeft: '8%',
+          marginRight: '8%'
+        }
+      };
+      zingchart.MODULESDIR="{% static '/js/zingchart-modules/' %}";
+      zingchart.loadModules('calendar', function() {
+        zingchart.render({
+          id: 'heatmap',
+          data: myConfig,
+          height: 400,
+          width: '100%'
+        });
+      });
+        </script>
+    </div>
+    
+    <div id="ABC_tag_bar">
+        <script>
+        var ABC_tag_data={
+            type: 'bar',
+            plotarea: {
+                'adjust-layout': false
+            },
+            "title": {
+                "text": "No. Of Problems Solved vs Problem Level",
+                "font-color": "#8993c7",
+                "backgroundColor": "none",
+                "font-size": "22px",
+                "alpha": 1,
+                "adjust-layout": false,
+            },
+            "plot": {
+                "bars-space-left": 0.15,
+                "bars-space-right": 0.15,
+                "animation": {
+                    "effect": "ANIMATION_SLIDE_BOTTOM",
+                    "sequence": 0,
+                    "speed": 800,
+                    "delay": 800
+                }
+            },
+            'scale-x': {
+                label: { /* Scale Title */
+                    text: "Problem Levels",
+                },
+                 labels: [{% for x in ABC_tagcount %}
+                 "{{x}}" {% if not forloop.last %},{% endif %}
+                 {% endfor %}]
+            },
+            'scale-y': {
+                label: {
+                    text: "No. of Problems"
+                }
+            },
+            series: [
+            {
+                values:[{% for l in ABC_tagcount %}
+                    {% get_ABC_count ABC_tagcount l as yoyo %}
+                    {{yoyo}} {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                ],
+                "background-color": "#8993c7"
+            }]
+        }
+        zingchart.render({
+        id: 'ABC_tag_bar',
+        data: ABC_tag_data,});
+        </script>
+    </div>
+    <div id="problem_rating_bar">
+        <script>
+        var problem_rating_data={
+            type: 'bar',
+            "title": {
+                "text": "No. Of Problems Solved vs Problem Rating",
+                "font-color": "#2da4cc",
+                "backgroundColor": "none",
+                "font-size": "22px",
+                "alpha": 1,
+                "adjust-layout": true,
+            },
+            plotarea: {
+                'adjust-layout': true
+            },
+            "plot": {
+                "bars-space-left": 0.15,
+                "bars-space-right": 0.15,
+                "animation": {
+                    "effect": "ANIMATION_SLIDE_BOTTOM",
+                    "sequence": 0,
+                    "speed": 800,
+                    "delay": 800
+                }
+            },
+            'scale-x': {
+                label: { /* Scale Title */
+                    text: "Problems Rating",
+                },
+                 labels: [{% for x in problem_ratingcount %}
+                 "{{x}}" {% if not forloop.last %},{% endif %}
+                 {% endfor %}]
+            },
+            'scale-y': {
+                label: {
+                    text: "No. of Problems"
+                }
+            },
+            series: [
+            {
+                values:[{% for l in problem_ratingcount %}
+                    {% get_ABC_count problem_ratingcount l as yoyo %}
+                    {{yoyo}} {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                ]
+            }]
+        }
+        zingchart.render({
+        id: 'problem_rating_bar',
+        data: problem_rating_data,});
+        </script>
+    </div>
+
+    <div id="myChart5">
+    <script>
+        var LangData = {
+            type : "pie3d",
+            legend: {
+
+            },
+            plot: {
+                tooltip: {
+                text: "%t<br>%npv%<br>%v"
+                },
+                
+            },
+            title : {
+            text : "Verdict of the Submissions"
+            },
+            series: [
+                    {% for v in verdict_count %}
+                    {% get_vcount verdict_count v as vil %}
+                    { values: {{vil}}, text : "{{v}}"} {% if not forloop.last %},{% endif %}
+                    {% endfor %}
+            ]
+
+        }
+
+        zingchart.render({
+            id: 'myChart5',
+            data: LangData,
+        });
+    </script>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    {% else %}
+        <h4>User Not Found</h4>
+    {% endif %}
     </div>
     
     </div>
