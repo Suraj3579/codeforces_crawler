@@ -7,3 +7,6 @@ class Query(models.Model):
     user_email = models.CharField(max_length=50)
     query_subject = models.CharField(max_length=50)
     query_text = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.user_email+' : '+self.query_subject
