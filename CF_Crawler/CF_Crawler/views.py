@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import urllib3
 import json
 from collections import Counter
@@ -9,13 +9,56 @@ from .forms import query_form
 from .models import Query
 from django.core.mail import send_mail
 from django.contrib import messages
+from .forms import CreateUserForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 
+@login_required(login_url='loginpage')
 def main_page(request):
     context = {}
     return render(request, 'home.html', context)
 
 
+def loginpage(request):
+    if request.user.is_authenticated:
+        return redirect('main_page')
+    else:
+        if request.method =="POST":
+            username =request.POST.get('username')
+            password=request.POST.get('password')
+            user = authenticate(request,username=username,password=password)
+            if user is not None:
+                login(request,user)
+                return redirect('main_page')
+            else:
+                messages.info(request,'Username or Password is Incorrect')
+                    
+        context={}
+        return render(request,'login.html',context)
+
+def logoutuser(request):
+    logout(request)
+    return redirect('loginpage')
+
+
+def registerpage(request):
+    if request.user.is_authenticated:
+        return redirect('main_page')
+    else:
+        form=CreateUserForm()
+        if request.method =="POST":
+            form=CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user=form.cleaned_data.get('username')
+                messages.success(request,'Account was created for ' + user)
+                return redirect('loginpage')
+        context={'form':form}
+        return render(request,"register.html",context)
+
+
+@login_required(login_url='loginpage')
 def contact(request):
     context = {}
     # if this is a POST request we need to process the form data
@@ -45,7 +88,7 @@ def contact(request):
 
     return render(request, 'contact.html', {'form': form})
 
-
+@login_required(login_url='loginpage')
 def user_handle(request):
     # if this is a POST request we need to process the form data
     context1 = {}
