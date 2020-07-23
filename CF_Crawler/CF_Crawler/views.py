@@ -101,12 +101,12 @@ def user_handle(request):
         userinfo_list = json.loads(u.data.decode('utf-8'))
         status = userinfo_list['status']
         if status != 'OK':
-            print("user not found")
+            # print("user not found")
             status = False
             userinfo_list = userinfo_list['comment']
-            print("yoyo " + userinfo_list)
+            # print("yoyo " + userinfo_list)
         else:
-            print("user found")
+            # print("user found")
             status = True
             userinfo_list = userinfo_list["result"]
             userinfo_list = userinfo_list[0]
@@ -170,7 +170,7 @@ def user_handle(request):
                 list.append(date)
                 list.append(datecount[date])
                 datefreq.append(list)
-            print(datefreq)
+            # print(datefreq)
             # ----end---------#
             verdict_count = Counter(verdicts)
             contest_count = Counter(contestids)
@@ -203,7 +203,7 @@ def user_handle(request):
             for i in rtime:
                 dtime.append(datetime.fromtimestamp(i).strftime("%d %b'%y"))
 
-            print(dtime)
+            # print(dtime)
             context1 = {'userinfo_list': userinfo_list, 'status': status,
                         'tagcount': tagcount, 'langcount': langcount, 'ABC_tagcount': ABC_tagcount,
                         'problem_ratingcount': problem_ratingcount,
