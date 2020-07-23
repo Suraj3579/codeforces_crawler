@@ -23,4 +23,7 @@ urlpatterns = [
     path('userhandle/', views.user_handle, name='userhandle'),
     path('contactus/', views.contact, name='contact'),
     path('CodeCalender/', include('CodeCalender.urls')),
+    path('login/',views.loginpage,name='loginpage'),
+    path('register/',views.registerpage,name='registerpage'),
+    path('logoutuser/',views.logoutuser,name='logoutuser'),
 ]
