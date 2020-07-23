@@ -127,7 +127,7 @@ def user_handle(request):
             user_analysis = user_analysis["result"]
             temp = set()
             for x in user_analysis:
-                if x['id'] not in temp and x['verdict'] == 'OK':
+                if x['id'] not in temp and x['verdict'] == 'OK' and 'rating' in x['problem']:
                     temp.add(x['id'])
                     tag.extend(x['problem']['tags'])
                     lang.append(x['programmingLanguage'])
