@@ -2,13 +2,53 @@
 {%block content%}
 {% load static %}
 
-    <div class="screen-box" style="background: #42D698">
+<section id="contact-form">
+                <div class="container">
+                  <div class="row">
+                      <div class="pad0 col-md-8 col-sm-12">
+                      <div class="block">
+        <div class="screen-box" style="background: #42D698">
            <div class="screen-title">How may we help you?</div>
     </div>
         <div class="separator"></div>
     <div class="page-heading">Query or Suggestion</div>
     <div class="page-sub-heading">Please fill the following form.</div>
     <div class="separator"></div>
+                      </div>
+                      </div>
+                    <div class="col-md-4 col-sm-12">
+                      <div class="block">
+                        <form method="post">
+
+                    {% csrf_token %}
+
+
+
+                  {% for hidden_field in form.hidden_fields %}
+                    {% if hidden_field.errors %}
+                      <ul>
+                        {% for error in hidden_field.errors %}
+                          <li>(Hidden field {{ hidden_field.name }}) {{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                    {{ hidden_field }}
+                  {% endfor %}
+
+
+                    {% for field in form.visible_fields %}
+                      <div class="form-group">
+                          {{ field }}
+                      </div>
+                    {% endfor %}
+                  <button type="submit" class="btn btn-default">Submit</button>
+                  </form>
+                </div>
+                </div>
+
+                  </div>
+                </div>
+</section>
 
     <!--<div class="parent">
         <div class="col">

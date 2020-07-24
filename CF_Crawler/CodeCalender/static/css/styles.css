@@ -161,7 +161,7 @@ footer {
 
 .block button {
   color: #efefef;
-  background-color: rgb(66, 140, 250);
+  background-color: #66BB6A;
   border-radius: 16px;
   margin-top: 15px;
 }
@@ -266,15 +266,24 @@ footer {
 }
 
 .button {
-  font-family: rubik;
+    font-family: rubik;
 
-  border: none;
+    border: none;
 
-  height: 40px;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 6px;
-  letter-spacing: 1.5px;
-  padding: 11px 16px;
-  text-decoration: none;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 6px;
+    letter-spacing: 1.5px;
+    padding: 11px 16px;
+    text-decoration: none;
+}
+
+.pad0{
+    padding:0;
+}
+
+.vis_field{
+    border:1px solid #66BB6A; !important
+    color: #66BB6A; !important
 }
