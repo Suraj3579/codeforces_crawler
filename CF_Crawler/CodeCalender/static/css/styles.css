@@ -287,3 +287,23 @@ footer {
   border: 1px solid #66bb6a !important;
   color: #66bb6a !important ;
 }
+
+.profile_container {
+    width:30%;
+    height:100%;
+    padding-top: 60px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+.photo {
+    width:20%;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 80px;
+}
+.rating_container {
+    width:50%;
+    height:100%;
+    padding-right: 30px;
+    padding-left: 25px;
+}
