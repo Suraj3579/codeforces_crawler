@@ -19,6 +19,7 @@ def main_page(request):
     context = {}
     return render(request, 'home.html', context)
 
+@login_required(login_url='loginpage')
 def developers(request):
     context = {}
     return render(request, 'developers.html', context)
