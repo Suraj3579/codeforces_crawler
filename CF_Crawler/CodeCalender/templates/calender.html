@@ -1,8 +1,13 @@
 {% extends 'index.html'%}
 {% block content %}
 {% load tag %}
+
+        <div class="screen-box" style="background: #42D698">
+           <div class="screen-title">Calendar</div>
+            <div class="screen-subtitle">The below table shows the future contests details.</div>
+        </div>
+        <div class="small-separator"></div>
     <div class="container" >
-        <!--<ul class="yoyo_ul">-->
         <table class="table table-bordered table-striped ctable">
                 <thead class="thead dark">
                    <tr>
@@ -21,13 +26,11 @@
                     <td class="ctime">{{ contest_time }}</td>
                 </tr>
 
-                 <!--<a href={{ link_contest }}{{ contest.id }} target="_blank">
-                     <li class="yoyo_li">{{ contest.name }}  --  {{ contest_time }}</li>
-                 </a>-->
+
             {% endif %}
         {% endfor %}
             </tbody>
         </table>
-        <!--</ul>-->
     </div>
+
 {% endblock %}

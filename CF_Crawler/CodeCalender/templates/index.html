@@ -5,43 +5,62 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>website_index</title>
   </head>
   <body>
+
   <section id="nav-bar">
-    <nav class="navbar navbar-expand-lg navbar-dark">
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">
-        <div id="logo" alt="">CF Crawler</div>
+        <div id="logo" alt="">Code Crawler</div>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/">Home </a>
+            <a class="nav-link" href="/">
+              <!--home icon-->
+              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
+                <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+              </svg>
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/CodeCalender">Calender</a>
+            <a class="nav-link" href="/CodeCalender">Calendar</a>
           </li>
-          <nav class="navbar navbar-dark">
+          <li class="nav-item">
+            <a class="nav-link" href="/contactus">Contact</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <nav class="navbar navbar-light bg-light">
             <form class="form-inline" method = "post" action = "{% url 'userhandle' %}">
               {% csrf_token %}
               
-              <input class="form-control mr-sm-2" type="search" name="input_handle" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <input class="form-control" type="search" name="input_handle" placeholder="Enter Username" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                <!--Search icon-->
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                  <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                </svg>
+              </button>
             </form>
           </nav>
+
           <li class="nav-item">
-            <a class="nav-link" href="/contactus">Contact Us</a>
-          </li>
-          <li class="nav-item">
-            <span>Hello, {{request.user}}</span>
+            <!--<span>Hello, {{request.user}}</span>-->
             <span><a class="nav-link" href="{%url 'logoutuser'%}">Logout</a></span>
           </li>
         </ul>
@@ -50,6 +69,7 @@
   </section>
   {% block content%}
   {% endblock %}
+  <hr>
   <footer>
     {% if messages %}
         {% for message in messages %}
@@ -58,8 +78,75 @@
         {% endfor %}
 
     {% endif %}
-    <h4>Developed and Maintained by </h4>
+
+    <br>
+    <hr>
+
+      <div class="row ">
+      <div class="col-lg-12 col-md-4 col-sm-6 col-xs-6">
+        <a class="foot" href="/">Home</a>
+        <a class="foot" href="/CodeCalender">Calender</a>
+        <a class="foot" href="/contactus">Contact</a>
+        <a class="foot" href="/developers">Developers</a>
+      </div>
+      </div>
+    <!--<h4>Developed and Maintained by </h4>
+
     <h6> <a href="https://github.com/chinmaianandh" target="_blank">Anandh</a> ,<a href="https://github.com/Suraj3579" target="_blank">Suraj</a> , <a href="https://github.com/jayaprakashjp12" target="_blank">JP</a> , <a href="https://github.com/chandan-git-04" target="_blank">Chandan</a> , Vikyath </h6>
+  -->
   </footer>
+  <!--<body>
+     <div class="container">
+       ::before
+       <div class="nav-wrapper">
+         <div id="myTopnav">
+           <div class="sidenav" style="width: 0px;">
+             <div class="mob-view">
+               <a class="close" onclick="sideclose()">
+                 <i class="fa fa-times" style="clor: black;"></i>
+               </a>
+               <hr>
+               <a href="/">Home</a>
+               <hr>
+               <a href="/codecalender">Calandar</a>
+               <hr>
+               <a href="/contactus">Contact Us</a>
+               <hr>
+               <a href="/login">Login</a>
+               <hr>
+             </div>
+           </div>
+           <div class="topnav">
+             <a class="icon" href="#" onclick="mobile_nav()">
+               <i class="fa fa-bars" style="color: black; margin-top: 12px; margin-left: 5px;"></i>
+             </a>
+             <a  href="#">
+                <div id="logo" alt="">Code Crawler</div>
+             </a>
+             <div class="nav-left container">
+               <a href="/">Home</a>
+               <a href="/codecalender">Calendar</a>
+               <a href="/contactus">Contact Us</a>
+             </div>
+             <div class="nav-right-container">
+               <form class="form-inline" method = "post" action = "{% url 'userhandle' %}">
+                  {% csrf_token %}
+
+                  <input class="form-control mr-sm-2" type="search" name="input_handle" placeholder="Enter Username" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                      <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                    </svg>
+                  </button>
+               </form>
+               <a href="/login">Login</a>
+             </div>
+           </div>
+         </div>
+       </div>
+       :: after
+     </div>-->
   </body>
 </html>

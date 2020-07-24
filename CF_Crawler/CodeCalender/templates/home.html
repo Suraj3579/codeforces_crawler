@@ -1,5 +1,13 @@
 {% extends 'index.html' %}
 {%block content%}
-<h4>Welcome to the Crawler!!</h4>
-<h6>Search for various Userhandles of CodeForces and CodeChef and get Information and detailed Analysis.</h6> 
+<div class="screen-box" style="background: #42D698">
+    <div class="screen-title"><span>Hello {{request.user}}</span></div>
+    <div class="screen-subtitle">Welcome to the Code Crawler!!</div>
+</div>
+<div class="separator"></div>
+    <div class="page-heading">About Us</div>
+    <div class="small-separator"></div>
+    <div class="page-text">We here provide the Information and Detailed Analysis of various Userhandles of CodeForces and CodeChef.
+    </div>
+<div class="col"> <a class="button button-success col" href="/login" >Login</a></div>
 {%endblock%}

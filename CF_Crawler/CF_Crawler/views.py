@@ -19,6 +19,9 @@ def main_page(request):
     context = {}
     return render(request, 'home.html', context)
 
+def developers(request):
+    context = {}
+    return render(request, 'developers.html', context)
 
 def loginpage(request):
     if request.user.is_authenticated:
