@@ -6,7 +6,46 @@
     <section id="userinfo">
     <div class = "container">
     <div class = "row">
-        <div class="rating_container" id="myChart2">
+    <div class = 'col-md-2 mt-5 ml-5 pl-5 pt-5'>
+    {% if status %}
+        <img src="{{ userinfo_list.avatar }}" height="260px" width="200px">
+        <p>{{ userinfo_list.handle }}</p>
+
+    {%endif%}
+    </div>
+    <div class = 'col-md-3 mt-5'>
+    {% if status %}
+        <p>{{ userinfo_list.handle }}</p>
+        <ul>
+        {% if userinfo_list.firstName%}
+            <li><h6>FirstName : {{ userinfo_list.firstName }}</h6></li>
+        {%endif%}
+        {% if userinfo_list.organization%}
+            <li><h6>Organisation : {{ userinfo_list.organization }}</h6></li>
+        {%endif%}
+        {% if userinfo_list.rating%}
+            <li><h6>Rating : {{ userinfo_list.rating }}</h6></li>
+        {%endif%}
+        {% if userinfo_list.rank%}
+            <li><h6>Rank : {{ userinfo_list.rank }}</h6></li>
+        {%endif%}
+        {% if userinfo_list.maxRating%}
+            <li><h6>MaxRating : {{ userinfo_list.maxRating }}</h6></li>
+        {%endif%}
+        {% if userinfo_list.maxRank%}
+            <li><h6>MaxRank : {{ userinfo_list.maxRank }}</h6></li>
+        {%endif%}
+        {% if userinfo_list.friendOfCount%}
+            <li><h6>Friends : {{ userinfo_list.friendOfCount }}</h6></li>
+        {%endif%}
+            <li><h6>Contests Participated : {{data_dict.noc}}</h6></li>
+            <li><h6>Total Submissions : {{data_dict.ts}}</h6></li>
+            <li><h6>Successful Submissions : {{data_dict.ss}}</h6></li>
+            <li><h6>Maximum Submissions for a Single Question : {{data_dict.msqn}} ({{data_dict.msqc}})</h6></li>
+            <li><h6>Successful Questions with one Submission : {{data_dict.nqos}}</h6></li>
+        </ul>
+    </div>
+    <div class="col-md-6 " id="myChart2">
     <script>
         var Ratinggraph = {
             "type": "line",
@@ -122,52 +161,13 @@
             });
     </script>
     </div>
-    <div class = 'profile_container'>
-    {% if status %}
-        <p>{{ userinfo_list.handle }}</p>
-        <ul>
-        {% if userinfo_list.firstName%}
-            <li><h6>FirstName : {{ userinfo_list.firstName }}</h6></li>
-        {%endif%}
-        {% if userinfo_list.organization%}
-            <li><h6>Organisation : {{ userinfo_list.organization }}</h6></li>
-        {%endif%}
-        {% if userinfo_list.rating%}
-            <li><h6>Rating : {{ userinfo_list.rating }}</h6></li>
-        {%endif%}
-        {% if userinfo_list.rank%}
-            <li><h6>Rank : {{ userinfo_list.rank }}</h6></li>
-        {%endif%}
-        {% if userinfo_list.maxRating%}
-            <li><h6>MaxRating : {{ userinfo_list.maxRating }}</h6></li>
-        {%endif%}
-        {% if userinfo_list.maxRank%}
-            <li><h6>MaxRank : {{ userinfo_list.maxRank }}</h6></li>
-        {%endif%} 
-        {% if userinfo_list.friendOfCount%}
-            <li><h6>Friends : {{ userinfo_list.friendOfCount }}</h6></li>
-        {%endif%}
-            <li><h6>Contests Participated : {{data_dict.noc}}</h6></li>
-            <li><h6>Total Submissions : {{data_dict.ts}}</h6></li>
-            <li><h6>Successful Submissions : {{data_dict.ss}}</h6></li>
-            <li><h6>Maximum Submissions for a Single Question : {{data_dict.msqn}} ({{data_dict.msqc}})</h6></li>
-            <li><h6>Successful Questions with one Submission : {{data_dict.nqos}}</h6></li>
-        </ul>
-    </div>
 
-    <div class = 'photo'>
-    {% if status %}
-        <img src="{{ userinfo_list.avatar }}" height="260px" width="200px">
-        <p>{{ userinfo_list.handle }}</p>
 
-    {%endif%}
-    </div>
-
-    <div class = 'col-md-4' id ="myChart">
+    <div class = 'col-md-6 mt-5 pt-5' id ="myChart">
     <script>
         var SubmissionData = {
             type : "pie3d",
-            
+
             plot: {
                 tooltip: {
                 text: "%t<br>%npv%<br>%v"
@@ -197,7 +197,7 @@
     </div>
     
     
-    <div class = 'col-md-4' id="myChart1">
+    <div class = 'col-md-6 mt-5 pt-5' id="myChart1">
     <script>
         var LangData = {
             type : "pie3d",
@@ -229,7 +229,7 @@
         </script>
     </div>
 
-    <div class = 'col-md-4' id="myChart5">
+    <div class = 'col-md-6 mt-5 pt-5' id="myChart5">
     <script>
         var LangData = {
             type : "pie3d",
@@ -261,12 +261,11 @@
     </script>
     </div>
 
-
     
 
 
   
-    <div class = 'col-md-4' id="heatmap">
+    <div class = 'col-md-6 pt-5' id="heatmap">
         <script>
         var myConfig = {
         type: 'calendar',
@@ -397,7 +396,7 @@
         </script>
     </div>
     
-    <div class = 'col-md-4' id="ABC_tag_bar">
+    <div class = 'col-md-6 mt-5 pt-5' id="ABC_tag_bar">
         <script>
         var ABC_tag_data={
             type: 'bar',
@@ -450,7 +449,7 @@
         data: ABC_tag_data,});
         </script>
     </div>
-    <div class = 'col-md-4' id="problem_rating_bar">
+    <div class = 'col-md-6 mt-5 pt-5' id="problem_rating_bar">
         <script>
         var problem_rating_data={
             type: 'bar',
