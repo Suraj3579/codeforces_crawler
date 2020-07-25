@@ -100,7 +100,7 @@ def user_handle(request):
         # create a form instance and populate it with data from the request:
         form = request.POST['input_handle']
 
-        http = urllib3.PoolManager()
+        http = urllib3.PoolManager(cert_reqs='CERT_NONE')
         u = http.request('GET', ('https://codeforces.com/api/user.info?handles=' + form))
         userinfo_list = json.loads(u.data.decode('utf-8'))
         status = userinfo_list['status']
@@ -125,7 +125,7 @@ def user_handle(request):
             quests = []
             okquests = []
             nqos = 0  # no of successful questions in one submission
-            http = urllib3.PoolManager()
+            http = urllib3.PoolManager(cert_reqs='CERT_NONE')
             u = http.request('GET', 'https://codeforces.com/api/user.status?handle=' + form)
             user_analysis = json.loads(u.data.decode('utf-8'))
             user_analysis = user_analysis["result"]
@@ -194,7 +194,7 @@ def user_handle(request):
             rating = []
             rtime = []
             rank = []
-            http = urllib3.PoolManager()
+            http = urllib3.PoolManager(cert_reqs='CERT_NONE')
             u = http.request('GET', 'https://codeforces.com/api/user.rating?handle=' + form)
             useranalysis3 = json.loads(u.data.decode('utf-8'))
             useranalysis3 = useranalysis3["result"]

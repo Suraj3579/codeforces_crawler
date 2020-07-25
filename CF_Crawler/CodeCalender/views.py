@@ -6,9 +6,11 @@ from bs4 import BeautifulSoup
 import requests
 
 
+
 def code_calender(request):
-    http = urllib3.PoolManager()
+    http = urllib3.PoolManager(cert_reqs='CERT_NONE')
     r = http.request('GET', 'https://codeforces.com/api/contest.list?gym=false')
+    
     # print(r.status)
     contest_list = json.loads(r.data.decode('utf-8'))
     contest_list = contest_list["result"]
