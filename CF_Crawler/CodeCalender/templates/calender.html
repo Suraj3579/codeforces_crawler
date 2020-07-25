@@ -29,6 +29,12 @@
 
             {% endif %}
         {% endfor %}
+        {% for contest in chef_contest_list %}
+                <tr>
+                    <td class="cname"><a href={{ chef_link }}{{ contest.0 }} target="_blank" class="clink">{{ contest.1 }}</a></td>
+                    <td class="ctime">{{ contest.2 }} {{contest.3}}</td>
+                </tr>
+        {% endfor %}
             </tbody>
         </table>
     </div>
