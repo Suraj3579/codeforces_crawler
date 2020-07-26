@@ -2,7 +2,7 @@
 {% block content %}
 {% load tag %}
 
-        <div class="screen-box" style="background: #42D698">
+        <div class="screen-box" style="background: #14b5a5">
            <div class="screen-title">Calendar</div>
             <div class="screen-subtitle">The below table shows the future contests details.</div>
         </div>
@@ -12,7 +12,8 @@
                 <thead class="thead dark">
                    <tr>
                     <th>Contest Name</th>
-                    <th>Contest Time</th>
+                    <th style="text-align: center;">Contest In</th>
+                    <th style="text-align: center;">Contest Time</th>
                    </tr>
                 </thead>
             <tbody>
@@ -23,7 +24,8 @@
 
                 <tr>
                     <td class="cname"><a href={{ link_contest }}{{ contest.id }} target="_blank" class="clink">{{ contest.name }}</a></td>
-                    <td class="ctime">{{ contest_time }}</td>
+                    <td class="cname" style="text-align: center;">Code Forces</td>
+                    <td class="ctime" style="text-align: center;">{{ contest_time }}</td>
                 </tr>
 
 
@@ -32,7 +34,8 @@
         {% for contest in chef_contest_list %}
                 <tr>
                     <td class="cname"><a href={{ chef_link }}{{ contest.0 }} target="_blank" class="clink">{{ contest.1 }}</a></td>
-                    <td class="ctime">{{ contest.2 }} {{contest.3}}</td>
+                    <td class="cname" style="text-align: center;">Code Chef</td>
+                    <td class="ctime" style="text-align: center;">{{ contest.2 }} {{contest.3}}</td>
                 </tr>
         {% endfor %}
             </tbody>

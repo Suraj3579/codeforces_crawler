@@ -62,7 +62,7 @@ body {
   background-color: white;
 }
 -- > .nav-link {
-  color: black !important;
+  color: black;
   font-size: 40px;
   font-family: poppins;
   font-style: normal;
@@ -74,7 +74,7 @@ body {
 }
 /*rgb(59, 156, 30)*/
 .nav-item a:hover {
-  color: #42d698 !important;
+  color: #14b5a5 !important;
 }
 
 .home {
@@ -107,7 +107,11 @@ color: #333D47;
   padding: 15px;
 }
 .foot:hover {
+
   text-decoration: none;
+}
+.card-body a:hover{
+    text-decoration: none;
 }
 
 #userinfo img {
@@ -137,6 +141,9 @@ color: #333D47;
 
 .cname {
   padding: 5px 10px 5px 10px;
+  color: #333333;
+  font-size: 16px;
+  font-family: rubik;
 }
 
 .ctime {
@@ -144,7 +151,7 @@ color: #333D47;
 }
 
 .clink {
-  color: #28a745;
+  color: #14b5a5;
 }
 
 .clink:hover {
