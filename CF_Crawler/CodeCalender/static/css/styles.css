@@ -63,7 +63,10 @@ body {
 }
 -- > .nav-link {
   color: black !important;
-  font-size: 20px;
+  font-size: 40px;
+  font-family: poppins;
+  font-style: normal;
+  font-weight: normal;
 }
 
 .nav-item {
@@ -88,10 +91,15 @@ footer {
   color: black;
   background-color: white;
   text-align: center;
-  font-weight: bold;
   margin-top: auto;
   padding: 15px;
   position: sticky;
+  font-family: rubik;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 130.7%;
+color: #333D47;
 }
 
 .foot {
@@ -154,6 +162,16 @@ footer {
   padding-bottom: 20px;
 }
 
+#contact-form{
+    text-align: center;
+}
+
+.parent {
+    position: relative;
+    left: 600px;
+    width: calc(100% - 500px);
+}
+
 .fa {
   height: 50px;
   width: 50px;
@@ -182,8 +200,8 @@ footer {
 
 .screen-title {
   position: absolute;
-  left: 30%;
-  transform: translateX(-20%);
+  left: 50%;
+  transform: translateX(-50%);
   font-family: poppins;
   font-style: normal;
   font-weight: 600;
