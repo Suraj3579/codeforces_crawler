@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 {%block content%}
 {% load static %}
-<div class="container">
+<main class="container">
     <div class="screen-title" style="color: #14b5a5">Meet the developers</div>
     <div class="separator"></div>
 
@@ -9,9 +9,10 @@
     <main class="flex-shrink-0 mt-3">
     <div class="container">
         <div class="small-separator"></div>
+    </div>
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 my-4">
-                <div class="card" style="width: 18rem;margin:auto;">
+                <div class="card" style="width: 18rem ;margin:auto;">
                     <img src="{% static 'img/Suraj.jpg' %}" class="card-img-top" alt=""style="height: 300px; ">
                     <div class="card-body">
                         <h5 class="card-title">Suraj Raj</h5>
@@ -27,8 +28,8 @@
                 <div class="card" style="width: 18rem;margin:auto;">
                     <img src="{% static 'img/Anandh.jpg' %}" class="card-img-top" alt=""style="height: 300px; ">
                     <div class="card-body">
-                        <h5 class="card-title">Chinmayi Anandh</h5>
-                        <p class="card-text">Email: anandh@gmail.com</p>
+                        <h5 class="card-title">Chinmai Anandh</h5>
+                        <p class="card-text">Email: <a href="mailto:chinmaianandh906@gmail.com">chinmaianandh906</a></p>
                         <a href="https://github.com/chinmaianandh" target="_blank" style="color: #14b5a5">Anandh_git</a></p>
                        <!--a href="#" class="btn btn-primary">Go somewhere</a-->
                   </div>
@@ -71,11 +72,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
+    </main>
 
-
-</div>
-
-
+</main>
 {%endblock%}

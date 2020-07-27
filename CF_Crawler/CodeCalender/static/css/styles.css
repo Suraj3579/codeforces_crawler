@@ -176,11 +176,11 @@ color: #333D47;
     text-align: center;
 }*/
 
-.parent {
+/*.parent {
     position: relative;
     left: 500px;
     width: calc(100% - 400px);
-}
+}*/
 
 .fa {
   height: 50px;
@@ -188,10 +188,14 @@ color: #333D47;
 }
 
 .block button {
-  color: #efefef;
-  background-color: #66bb6a;
+  color: #14b5a5;
+  border: solid 1px #14b5a5;
   border-radius: 16px;
   margin-top: 15px;
+}
+.block button:hover{
+    background-color: #14b5a5;
+    color:white;
 }
 
 /*.block {
@@ -312,8 +316,26 @@ color: #333D47;
 }*/
 
 .vis_field {
-  border: 1px solid #66bb6a !important;
-  color: #66bb6a !important ;
+  border: 1px solid #14b5a5 !important;
+  color: #14b5a5 !important ;
+}
+
+.search_field {
+    border:none;
+  border-bottom: 1px solid #14b5a5 !important;
+  color: #14b5a5 !important ;
+
+}
+.search_field:focus{
+    box-shadow: 0 0 0 0.2em #14b5a5;
+}
+.btn_search{
+    color: #14b5a5;
+    border: none;
+}
+.btn_search:hover{
+    background:#14b5a5;
+    color:white;
 }
 
 .profile_container {
@@ -334,4 +356,12 @@ color: #333D47;
     height:100%;
     padding-right: 30px;
     padding-left: 25px;
+}
+
+.card{
+    border:none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card-deck{
+    margin:0;
 }

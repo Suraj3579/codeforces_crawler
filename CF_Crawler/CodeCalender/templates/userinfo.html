@@ -5,9 +5,10 @@
     <script src=" {% static '/js/zingchart.min.js' %}"></script>
     <section id="userinfo">
     <div class = "container">
-    <div class="card-deck">
+    <div class="card-deck mb-5">
         <div class="col-md-6">
-        <div class="card border-info mb-3"  >
+        <div class="card h-100 border-info mb-3"  >
+            <div class="card-header text-center">User Details</div>
             <div class="row no-gutters">
                 <div class="col-md-4">
 
@@ -55,7 +56,7 @@
         </div>
 
         <div class = "col-md-6">
-            <div class="card border-info mb-3">
+            <div class="card h-100 border-info mb-3">
                 <div class="card-header text-center">Submissions</div>
                 <div class="card-body" id="myChart">
 
@@ -73,9 +74,9 @@
                                 //to order pie slices by size and have reference angle start at zero.
 
                             },
-                            <!--title : {
+                            /*title : {
                             text : "Submissions"
-                            },-->
+                            },*/
                             series: [
                                     {% for tag in tagcount %}
                                     {% get_count tagcount tag as lol %}
@@ -97,9 +98,9 @@
         </div>
     </div>
 
-    <div class="card-deck">
+    <div class="card-deck mb-5">
         <div class="col-md-6 col-sm-12 col-xs-12" >
-            <div class="card border-info mb-3">
+            <div class="card h-100 border-info mb-3">
                 <div class="card-header text-center">Languages</div>
                 <div class="card-body" id="myChart1">
                     <script>
@@ -114,9 +115,9 @@
                                 },
 
                             },
-                            <!--title : {
+                            /*title : {
                             text : "Languages"
-                            },-->
+                            },*/
                             series: [
                                     {% for l in langcount %}
                                     {% get_count langcount l as lil %}
@@ -136,18 +137,18 @@
         </div>
 
         <div class="col-md-6 col-sm-12 col-xs-12" >
-            <div class="card border-info mb-3">
+            <div class="card h-100 border-info mb-3">
                 <div class="card-header text-center">Rating</div>
                 <div class="card-body" id="myChart2">
                     <script>
                         var Ratinggraph = {
                             "type": "line",
 
-                            <!--"title": {
+                            /*"title": {
                                 "text": "Rating",
                                 "font-size": "24px",
                                 "adjust-layout": true
-                            },-->
+                            },*/
                             "plotarea": {
                                 "margin": "dynamic 45 60 dynamic",
                             },
@@ -258,10 +259,10 @@
         </div>
     </div>
 
-    <div class="card-deck">
+    <div class="card-deck mb-5">
 
         <div class="col-md-6 col-sm-12 col-xs-12" >
-            <div class="card border-info mb-3">
+            <div class="card h-100 border-info mb-3">
                 <div class="card-header text-center">Day-wise Submissions</div>
                 <div class="card-body" id="heatmap">
                     <script>
@@ -397,7 +398,7 @@
         </div>
 
         <div class="col-md-6 col-sm-12 col-xs-12" >
-            <div class="card border-info mb-3">
+            <div class="card h-100 border-info mb-3">
                 <div class="card-header text-center">Verdict of the Submissions</div>
                 <div class="card-body" id="myChart5">
                     <script>
@@ -412,9 +413,9 @@
                                 },
 
                             },
-                            <!--title : {
+                            /*title : {
                             text : "Verdict of the Submissions"
-                            },-->
+                            },*/
                             series: [
                                     {% for v in verdict_count %}
                                     {% get_vcount verdict_count v as vil %}
@@ -433,11 +434,11 @@
             </div>
         </div>
     </div>
-    <div class="card-deck">
+    <div class="card-deck mb-5">
 
         <div class="col-md-6 col-sm-12 col-xs-12" >
-            <div class="card border-info mb-3">
-                <div class="card-header text-center" style="color: #8993c7;">No. Of Problems Solved vs Problem Level</div>
+            <div class="card h-100 border-info mb-3">
+                <div class="card-header text-center">No. Of Problems Solved vs Problem Level</div>
                 <div class="card-body" id="ABC_tag_bar">
                     <script>
                     var ABC_tag_data={
@@ -445,14 +446,14 @@
                         plotarea: {
                             'adjust-layout': false
                         },
-                        <!-- "title": {
+                        /* "title": {
                             "text": "No. Of Problems Solved vs Problem Level",
                             "font-color": "#8993c7",
                             "backgroundColor": "none",
                             "font-size": "22px",
                             "alpha": 1,
                             "adjust-layout": false,
-                        },-->
+                        },*/
                         "plot": {
                             "bars-space-left": 0.15,
                             "bars-space-right": 0.15,
@@ -495,20 +496,20 @@
         </div>
 
         <div class="col-md-6 col-sm-12 col-xs-12" >
-            <div class="card border-info mb-3">
-                <div class="card-header text-center" style="color: #2da4cc">No. Of Problems Solved vs Problem Rating</div>
+            <div class="card h-100 border-info mb-3">
+                <div class="card-header text-center">No. Of Problems Solved vs Problem Rating</div>
                 <div class="card-body" id="problem_rating_bar">
                     <script>
                     var problem_rating_data={
                         type: 'bar',
-                        <!--"title": {
+                        /*"title": {
                             "text": "No. Of Problems Solved vs Problem Rating",
                             "font-color": "#2da4cc",
                             "backgroundColor": "none",
                             "font-size": "22px",
                             "alpha": 1,
                             "adjust-layout": true,
-                        },-->
+                        },*/
                         plotarea: {
                             'adjust-layout': true
                         },

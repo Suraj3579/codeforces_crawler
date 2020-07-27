@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,11 +22,11 @@
       <a class="navbar-brand" href="#">
         <div id="logo" alt="">Code Crawler</div>
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#yoyonavbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse" id="yoyonavbarNav">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="/">
@@ -59,8 +60,8 @@
             <form class="form-inline" method = "post"  style="color: #14b5a5; border: none;" action = "{% url 'userhandle' %}">
               {% csrf_token %}
               
-              <input class="form-control vis_field" type="search" name="input_handle" placeholder="Enter Username" aria-label="Search" >
-              <button class="btn btn-outline-success my-2 my-sm-0" style="color: #14b5a5; border: none;"  type="submit">
+              <input class="form-control search_field" type="search" name="input_handle" placeholder="Enter Username" aria-label="Search" >
+              <button class="btn btn_search my-2 my-sm-0" type="submit">
                 <!--Search icon-->
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
@@ -160,4 +161,6 @@
        :: after
      </div>-->
   </body>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
 </html>

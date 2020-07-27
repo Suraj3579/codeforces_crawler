@@ -19,27 +19,30 @@ def main_page(request):
     context = {}
     return render(request, 'home.html', context)
 
+
 @login_required(login_url='loginpage')
 def developers(request):
     context = {}
     return render(request, 'developers.html', context)
 
+
 def loginpage(request):
     if request.user.is_authenticated:
         return redirect('main_page')
     else:
-        if request.method =="POST":
-            username =request.POST.get('username')
-            password=request.POST.get('password')
-            user = authenticate(request,username=username,password=password)
+        if request.method == "POST":
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
             if user is not None:
-                login(request,user)
+                login(request, user)
                 return redirect('main_page')
             else:
-                messages.info(request,'Username or Password is Incorrect')
-                    
-        context={}
-        return render(request,'login.html',context)
+                messages.info(request, 'Username or Password is Incorrect')
+
+        context = {}
+        return render(request, 'login.html', context)
+
 
 def logoutuser(request):
     logout(request)
@@ -50,16 +53,16 @@ def registerpage(request):
     if request.user.is_authenticated:
         return redirect('main_page')
     else:
-        form=CreateUserForm()
-        if request.method =="POST":
-            form=CreateUserForm(request.POST)
+        form = CreateUserForm()
+        if request.method == "POST":
+            form = CreateUserForm(request.POST)
             if form.is_valid():
                 form.save()
-                user=form.cleaned_data.get('username')
-                messages.success(request,'Account was created for ' + user)
+                user = form.cleaned_data.get('username')
+                messages.success(request, 'Account was created for ' + user)
                 return redirect('loginpage')
-        context={'form':form}
-        return render(request,"register.html",context)
+        context = {'form': form}
+        return render(request, "register.html", context)
 
 
 @login_required(login_url='loginpage')
@@ -78,10 +81,11 @@ def contact(request):
             tem.user_name = form.cleaned_data['user_name']
             tem.user_email = form.cleaned_data['user_email']
             tem.save()
-            messages.info(request,'Your Query has been Successfully Submitted.')
-            recipients=['saichandan518@gmail.com','lykira2468@gmail.com','chinmaianandh906@gmail.com']
+            messages.info(request, 'Your Query has been Successfully Submitted.')
+            recipients = ['saichandan518@gmail.com', 'lykira2468@gmail.com', 'chinmaianandh906@gmail.com']
             # print('before sending email')
-            send_mail((tem.user_name+' : '+tem.user_email+' : '+tem.query_subject), tem.query_text, 'CodeCrawler906@gmail.com', recipients, fail_silently=False)
+            send_mail((tem.user_name + ' : ' + tem.user_email + ' : ' + tem.query_subject), tem.query_text,
+                      'CodeCrawler906@gmail.com', recipients, fail_silently=False)
             # print('email sent')
             # redirect to a new URL:
             return HttpResponseRedirect('/contactus/')
@@ -91,6 +95,7 @@ def contact(request):
         form = query_form()
 
     return render(request, 'contact.html', {'form': form})
+
 
 @login_required(login_url='loginpage')
 def user_handle(request):
