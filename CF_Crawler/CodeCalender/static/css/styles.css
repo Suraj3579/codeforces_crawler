@@ -133,8 +133,11 @@ color: #333D47;
   display: inline;
   margin: auto;
 }
-
+.pagetable{
+   postion: relative;
+}
 .ctable {
+  position: relative;
   margin: auto;
   border-collapse: separate;
 }
@@ -169,14 +172,14 @@ color: #333D47;
   padding-bottom: 20px;
 }
 
-#contact-form{
+/*#contact-form{
     text-align: center;
-}
+}*/
 
 .parent {
     position: relative;
-    left: 600px;
-    width: calc(100% - 500px);
+    left: 500px;
+    width: calc(100% - 400px);
 }
 
 .fa {
@@ -191,10 +194,10 @@ color: #333D47;
   margin-top: 15px;
 }
 
-.block {
+/*.block {
   padding-left: 10px;
   padding-right: 10px;
-}
+}*/
 
 .screen-box {
   position: relative;
@@ -304,9 +307,9 @@ color: #333D47;
   text-decoration: none;
 }
 
-.pad0 {
+/*.pad0 {
   padding: 0;
-}
+}*/
 
 .vis_field {
   border: 1px solid #66bb6a !important;

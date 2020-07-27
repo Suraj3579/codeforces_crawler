@@ -56,11 +56,11 @@
         </ul>
         <ul class="navbar-nav ml-auto">
           <nav class="navbar navbar-light bg-light">
-            <form class="form-inline" method = "post" action = "{% url 'userhandle' %}">
+            <form class="form-inline" method = "post"  style="color: #14b5a5; border: none;" action = "{% url 'userhandle' %}">
               {% csrf_token %}
               
-              <input class="form-control vis_field" type="search" name="input_handle" placeholder="Enter Username" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+              <input class="form-control vis_field" type="search" name="input_handle" placeholder="Enter Username" aria-label="Search" >
+              <button class="btn btn-outline-success my-2 my-sm-0" style="color: #14b5a5; border: none;"  type="submit">
                 <!--Search icon-->
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
