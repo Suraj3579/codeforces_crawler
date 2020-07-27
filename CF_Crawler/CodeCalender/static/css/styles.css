@@ -129,6 +129,9 @@ color: #333D47;
   font-weight: bold;
   text-align: center;
 }
+.card-header {
+  color: #14b5a5;
+}
 .container {
   display: inline;
   margin: auto;
