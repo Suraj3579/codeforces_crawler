@@ -370,3 +370,8 @@ color: #333D47;
 .card-deck{
     margin:0;
 }
+@media (min-width: 992px){
+    .container-fluid{
+        width:70%;
+    }
+}
