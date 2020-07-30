@@ -1,9 +1,10 @@
-{%load static%}
 <!DOCTYPE html>
+{%load static%}
 <html>
     
 <head>
-	<title>Login</title>
+	<title>Code Crawler | Login</title>
+	<link rel = "icon" href ="{%static 'img/logo.jpeg'%}" type = "image/x-icon">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -23,8 +24,8 @@
 		}
 		.user_card {
 			width: 350px;
-			margin-top: auto;
-			margin-bottom: auto;
+			margin-top: 50px;
+			margin-bottom: 50px;
 			background-color:white;
 			
 			justify-content: center;
@@ -85,7 +86,7 @@
 		@media screen and (min-width:760px)
 		{
 			.leftside, .rightside{
-			height:100vh;
+			height:50vh;
 			}
 		}
 
@@ -113,8 +114,18 @@
 <body>
 	
 		<div class='row no-gutters'>
-			<div class='col-md-5 no-gutters'>
-				<div class='leftside d-flex justify-content-center align-items-center'>
+			<div class='col-md-12 no-gutters'>
+				<div class="row" style="margin-left:0;margin-right:0;">
+				<div class="info col-md-6 col-sm-12" style="margin:0;padding-top:80px;">
+					<div>
+						<div id="logo" style="text-align:center; color: #14b5a5; padding:10px; font-size:36px; font-weight:bold; " alt=""><img src="{%static 'img/logo.jpeg'%}" alt="" style="height:50px; width:50px;">Code Crawler</div>
+						<ul>
+						<li>Get Information and Detailed Analysis of various Codeforces and Codechef userhandles.</li>
+						<li>Get the Details of various upcoming contests.</li>
+						</ul>
+					</div>
+				</div>
+				<div class='d-flex justify-content-center col-md-6 col-sm-12' style="margin:0;">
 				<div class="user_card">
 					<div class="d-flex justify-content-center">
 						<div id="logo" style="font-size:26px; font-weight:bold; color: #14b5a5;" alt=""><img src="{%static 'img/logo.jpeg'%}" alt="" style="height:50px; width:50px;">Code Crawler</div>
@@ -151,16 +162,11 @@
 					</div>
 				</div>
 				</div>
+				</div>
 			</div>
-			<div class='col-md-7 no-gutters'>
-				<div class='rightside '>
-					<div class="info">
-						<div id="logo" style="align-items:center; justify-content:center;color: #14b5a5; padding:10px; font-size:36px; font-weight:bold;" alt=""><img src="{%static 'img/logo.jpeg'%}" alt="" style="height:50px; width:50px;">Code Crawler</div>
-						<ul>
-						<li>Get Information and Detailed Analysis of various Codeforces and Codechef userhandles.</li>
-						<li>Get the Details of various upcoming contests.</li>
-						</ul>
-					</div>
+			<div class='col-md-6 col-sm-12 no-gutters' style="margin:auto;">
+				<div class='' style="height:fit-content;">
+
 					<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 					<ol class="carousel-indicators">
 						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

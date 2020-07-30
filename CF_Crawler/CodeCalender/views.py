@@ -37,22 +37,21 @@ def code_calender(request):
         # print (tag.text)
         result.extend(tag.stripped_strings)
         link = tag.find('a')
-        if link != None:
+        if link is not None:
             link = link.get('href')
             links.append(link)
     chef_contest_list = []
     count = len(links)
     # print (count)
     for i in range(count):
-        list = []
-        list.append(links[0])
+        lis = [links[0]]
         links.pop(0)
         result.pop(0)
         for j in range(3):
-            list.append(result[0])
+            lis.append(result[0])
             result.pop(0)
         result.pop(0), result.pop(0)
-        chef_contest_list.append(list)
+        chef_contest_list.append(lis)
 
     # print(chef_contest_list)
     chef_link = "https://www.codechef.com"

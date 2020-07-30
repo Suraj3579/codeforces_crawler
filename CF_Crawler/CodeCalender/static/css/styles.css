@@ -136,8 +136,7 @@ color: #333D47;
   display: inline;
   margin: auto;
 }
-.pagetable{
-   top: 300px;
+div.pagetable{
    position: relative;
 }
 .ctable {
