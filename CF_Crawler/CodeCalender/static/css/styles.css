@@ -137,11 +137,13 @@ color: #333D47;
   margin: auto;
 }
 .pagetable{
-   postion: relative;
+   top: 300px;
+   position: relative;
 }
 .ctable {
   position: relative;
-  margin: auto;
+  margin-left: auto;
+  margin-right:auto;
   border-collapse: separate;
 }
 
