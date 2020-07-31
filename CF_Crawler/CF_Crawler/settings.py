@@ -25,7 +25,7 @@ SECRET_KEY = 'oof$2perp-fsjtul1i2*!5mt611ny%(f!3b5%*7hkh5e8b6e6v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['codecrawler.pythonanywhere.com','localhost']
 
 
 # Application definition

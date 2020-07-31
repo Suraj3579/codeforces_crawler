@@ -6,11 +6,12 @@
 {% load tag %}
 
         <div class="screen-box" style="background: #14b5a5">
-           <div class="screen-title">Calendar</div>
+           <div class="screen-title">Calendar
             <div class="screen-subtitle">The below table shows the future contests details.</div>
+               </div>
         </div>
         <div class="small-separator"></div>
-<div class="row">
+<div class="row tablerow">
     <div class="col-lg-2 col-md-0"></div>
     <div class="pagetable col-lg-8 col-md-12">
 
@@ -37,15 +38,15 @@
 
             {% endif %}
         {% endfor %}
-        {% for contest in chef_contest_list %}
-                <tr>
-                    <td class="cname"><a href={{ chef_link }}{{ contest.0 }} target="_blank" class="clink">{{ contest.1 }}</a></td>
-                    <td class="cname" style="text-align: center;">Code Chef</td>
-                    <td class="ctime" style="text-align: center;">{{ contest.2 }} {{contest.3}}</td>
-                </tr>
+<!--        {% for contest in chef_contest_list %}-->
+<!--                <tr>-->
+<!--                    <td class="cname"><a href={{ chef_link }}{{ contest.0 }} target="_blank" class="clink">{{ contest.1 }}</a></td>-->
+<!--                    <td class="cname" style="text-align: center;">Code Chef</td>-->
+<!--                    <td class="ctime" style="text-align: center;">{{ contest.2 }} {{contest.3}}</td>-->
+<!--                </tr>-->
 
 
-        {% endfor %}
+<!--        {% endfor %}-->
             </tbody>
         </table>
     </div>

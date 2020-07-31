@@ -138,7 +138,6 @@ color: #333D47;
 }
 div.pagetable{
    position: relative;
-
 }
 .ctable {
   position: relative;
@@ -209,37 +208,32 @@ div.pagetable{
 }*/
 
 .screen-box {
-  position: relative;
+  position: static;
   width: 100%;
-  height: 280px;
+  height: fit-content;
   background-color: #0875e1;
   color: white;
   text-align: center;
 }
 
 .screen-title {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  position: static;
   font-family: poppins;
   font-style: normal;
   font-weight: 600;
   font-size: 48px;
   line-height: 130.7%;
   top: 100px;
-  padding-bottom: 10px;
+  padding: 80px;
 }
 
 .screen-subtitle {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  position: static;
   font-family: rubik;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 130.7%;
-  top: 160px;
 }
 
 .separator {
@@ -374,4 +368,8 @@ div.pagetable{
     .container-fluid{
         width:70%;
     }
+}
+
+.tablerow{
+    top:300px;
 }
