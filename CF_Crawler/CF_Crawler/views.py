@@ -13,10 +13,6 @@ from .forms import CreateUserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 import requests
-<<<<<<< HEAD
-
-=======
->>>>>>> 61b9a512db09b52215b2899d90d08415ab11e7b8
 
 @login_required(login_url='loginpage')
 def main_page(request):
