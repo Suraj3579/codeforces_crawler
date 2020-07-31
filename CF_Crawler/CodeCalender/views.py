@@ -7,11 +7,11 @@ import requests
 
 
 def code_calender(request):
-    http = urllib3.PoolManager()
-    r = http.request('GET', 'https://codeforces.com/api/contest.list?gym=false')
+    # http = urllib3.PoolManager()
+    r = requests.get('https://codeforces.com/api/contest.list?gym=false')
 
     # print(r.status)
-    contest_list = json.loads(r.data.decode('utf-8'))
+    contest_list = r.json()
     contest_list = contest_list["result"]
     contest_list = contest_list[:10]
     string = "BEFORE"

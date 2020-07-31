@@ -12,7 +12,7 @@ from django.contrib import messages
 from .forms import CreateUserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-
+import requests
 
 @login_required(login_url='loginpage')
 def main_page(request):
@@ -105,9 +105,9 @@ def user_handle(request):
         # create a form instance and populate it with data from the request:
         form = request.POST['input_handle']
 
-        http = urllib3.PoolManager(cert_reqs='CERT_NONE')
-        u = http.request('GET', ('https://codeforces.com/api/user.info?handles=' + form))
-        userinfo_list = json.loads(u.data.decode('utf-8'))
+
+        u = requests.get(('https://codeforces.com/api/user.info?handles=' + form))
+        userinfo_list = u.json()
         status = userinfo_list['status']
         if status != 'OK':
             # print("user not found")
@@ -130,9 +130,9 @@ def user_handle(request):
             quests = []
             okquests = []
             nqos = 0  # no of successful questions in one submission
-            http = urllib3.PoolManager(cert_reqs='CERT_NONE')
-            u = http.request('GET', 'https://codeforces.com/api/user.status?handle=' + form)
-            user_analysis = json.loads(u.data.decode('utf-8'))
+
+            u = requests.get('https://codeforces.com/api/user.status?handle=' + form)
+            user_analysis = u.json()
             user_analysis = user_analysis["result"]
             temp = set()
             for x in user_analysis:
@@ -199,9 +199,9 @@ def user_handle(request):
             rating = []
             rtime = []
             rank = []
-            http = urllib3.PoolManager(cert_reqs='CERT_NONE')
-            u = http.request('GET', 'https://codeforces.com/api/user.rating?handle=' + form)
-            useranalysis3 = json.loads(u.data.decode('utf-8'))
+
+            u = requests.get('https://codeforces.com/api/user.rating?handle=' + form)
+            useranalysis3 = u.json()
             useranalysis3 = useranalysis3["result"]
             for item in useranalysis3:
                 rating.append(item['newRating'])
