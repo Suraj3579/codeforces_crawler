@@ -90,6 +90,14 @@
 			}
 		}
 
+		@media screen and (max-width:767px)
+		{
+			.leftside, .rightside{
+			height:100%;
+			width:100%;
+			}
+		}
+
 		.leftside{
 			background-image:url({%static 'img/bg.jpg' %});
 		}
@@ -119,7 +127,7 @@
 <body>
 	
 		<div class='row no-gutters'>
-			<div class='col-md-5 no-gutters'>
+			<div class='col-md-12 col-sm-12 col-lg-5 no-gutters'>
 				<div class='leftside d-flex justify-content-center align-items-center'>
 					<div class="user_card">
 						<div class="d-flex justify-content-center">
@@ -158,7 +166,7 @@
 					</div>
 				</div>
 			</div>
-			<div class='col-md-7 no-gutters'>
+			<div class='col-md-12 col-sm-12 col-lg-7 no-gutters'>
 				<div class="rightside ">
 					<div id="logo" style="text-align:center; color: #14b5a5; padding:20px; font-size:36px; font-weight:bold; " alt=""><img src="{%static 'img/logo.jpeg'%}" alt="" style="height:50px; width:50px;">Code Crawler</div>
 					<ul>
