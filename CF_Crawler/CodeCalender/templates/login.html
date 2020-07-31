@@ -83,7 +83,7 @@
 			width:100%;
 		}
 
-		@media screen and (min-width:768px)
+		@media screen and (min-width:992px)
 		{
 			.leftside, .rightside{
 			height:100vh;
@@ -99,7 +99,8 @@
 		}
 
 		.leftside{
-			background-image:url({%static 'img/bg.jpg' %});
+			background:url({%static 'img/bg.jpg' %}) no-repeat center;
+			background-size:cover;
 		}
 
 		.rightside{
