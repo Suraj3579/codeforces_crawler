@@ -7,7 +7,7 @@ import requests
 
 
 def code_calender(request):
-    http = urllib3.PoolManager(cert_reqs='CERT_NONE')
+    http = urllib3.PoolManager()
     r = http.request('GET', 'https://codeforces.com/api/contest.list?gym=false')
 
     # print(r.status)
