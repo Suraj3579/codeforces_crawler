@@ -12,6 +12,7 @@ from django.contrib import messages
 from .forms import CreateUserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+import requests
 
 
 @login_required(login_url='loginpage')
