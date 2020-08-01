@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 import requests
 
+
 @login_required(login_url='loginpage')
 def main_page(request):
     context = {}
@@ -104,7 +105,6 @@ def user_handle(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = request.POST['input_handle']
-
 
         u = requests.get(('https://codeforces.com/api/user.info?handles=' + form))
         userinfo_list = u.json()

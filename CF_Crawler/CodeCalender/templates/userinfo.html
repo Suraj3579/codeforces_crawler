@@ -238,9 +238,7 @@
                     <script>
                         var LangData = {
                             type : "pie3d",
-                            legend: {
 
-                            },
                             plot: {
                                 tooltip: {
                                 text: "%t<br>%npv%<br>%v"
@@ -270,7 +268,6 @@
     </div>
 
     <div class="card-deck mb-5">
-
         <div class="col-md-6 col-sm-12 col-xs-12" >
             <div class="card h-100 border-info mb-3">
                 <div class="card-header text-center">Day-wise Submissions</div>
@@ -284,7 +281,7 @@
                             visible: true
                           },
                           startMonth: 1,
-                          endMonth: 7,
+                          endMonth: 8,
                           palette: ['none', '#2196F3'],
                           month: {
                             item: {
@@ -293,7 +290,7 @@
                             }
                           },
                           weekday: {
-                            values: ['', 'M', '', 'W', '', 'F', ''],
+                            values: ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
                             item: {
                               fontColor: 'gray',
                               fontSize: 9
@@ -302,7 +299,7 @@
                           values:[
                               {% for date in datecount %}
                               {% date_count datecount date as lil %}
-                              [ '{{ date }}',{{lil}} ]    ,
+                              [ ' {{ date }} ' , {{lil}} ] {% if not forloop.last %},{% endif %}
                               {%endfor%}
                           ]
                         },
@@ -361,7 +358,7 @@
                             width: '36%'
                           },
                           { //Rightside Label (bottom portion)
-                            text: 'Jan 1 - Jun 30',
+                            text: 'Jan 1 - Aug 30',
                             fontColor: '#212121',
                             padding: 2,
                             textAlign: 'center',
@@ -398,7 +395,7 @@
                         zingchart.render({
                           id: 'heatmap',
                           data: myConfig,
-                          height: 400,
+                          height: '100%',
                           width: '100%'
                         });
                       });
@@ -414,9 +411,7 @@
                     <script>
                         var LangData = {
                             type : "pie3d",
-                            legend: {
 
-                            },
                             plot: {
                                 tooltip: {
                                 text: "%t<br>%npv%<br>%v"
