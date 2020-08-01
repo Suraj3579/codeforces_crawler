@@ -189,7 +189,7 @@
     </div>
 
     <div class="card-deck mb-5">
-        <div class = "col-md-6">
+        <div class = "col-md-6 col-sm-12 col-xs-12">
             <div class="card h-100 border-info mb-3">
                 <div class="card-header text-center">Submissions</div>
                 <div class="card-body" id="myChart">
@@ -198,6 +198,10 @@
 
                         var SubmissionData = {
                             type : "pie3d",
+                            "layout": "2x2",
+                            "scale": {
+                                   "size-factor": 0.5
+                            },
 
                             plot: {
                                 tooltip: {
@@ -230,15 +234,17 @@
 
             </div>
         </div>
-
         <div class="col-md-6 col-sm-12 col-xs-12" >
             <div class="card h-100 border-info mb-3">
-                <div class="card-header text-center">Languages</div>
-                <div class="card-body" id="myChart1">
+                <div class="card-header text-center">Verdict of the Submissions</div>
+                <div class="card-body" id="myChart5">
                     <script>
                         var LangData = {
                             type : "pie3d",
-
+                            "layout": "2x2",
+                            "scale": {
+                                   "size-factor": 0.5
+                            },
                             plot: {
                                 tooltip: {
                                 text: "%t<br>%npv%<br>%v"
@@ -246,19 +252,19 @@
 
                             },
                             /*title : {
-                            text : "Languages"
+                            text : "Verdict of the Submissions"
                             },*/
                             series: [
-                                    {% for l in langcount %}
-                                    {% get_count langcount l as lil %}
-                                    { values: {{lil}}, text : "{{l}}"} {% if not forloop.last %},{% endif %}
+                                    {% for v in verdict_count %}
+                                    {% get_vcount verdict_count v as vil %}
+                                    { values: {{vil}}, text : "{{v}}"} {% if not forloop.last %},{% endif %}
                                     {% endfor %}
                             ]
 
                         }
 
                         zingchart.render({
-                            id: 'myChart1',
+                            id: 'myChart5',
                             data: LangData,
                         });
                     </script>
@@ -406,12 +412,15 @@
 
         <div class="col-md-6 col-sm-12 col-xs-12" >
             <div class="card h-100 border-info mb-3">
-                <div class="card-header text-center">Verdict of the Submissions</div>
-                <div class="card-body" id="myChart5">
+                <div class="card-header text-center">Languages</div>
+                <div class="card-body" id="myChart1">
                     <script>
                         var LangData = {
                             type : "pie3d",
-
+                            "layout": "2x2",
+                            "scale": {
+                                   "size-factor": 0.5
+                            },
                             plot: {
                                 tooltip: {
                                 text: "%t<br>%npv%<br>%v"
@@ -419,19 +428,19 @@
 
                             },
                             /*title : {
-                            text : "Verdict of the Submissions"
+                            text : "Languages"
                             },*/
                             series: [
-                                    {% for v in verdict_count %}
-                                    {% get_vcount verdict_count v as vil %}
-                                    { values: {{vil}}, text : "{{v}}"} {% if not forloop.last %},{% endif %}
+                                    {% for l in langcount %}
+                                    {% get_count langcount l as lil %}
+                                    { values: {{lil}}, text : "{{l}}"} {% if not forloop.last %},{% endif %}
                                     {% endfor %}
                             ]
 
                         }
 
                         zingchart.render({
-                            id: 'myChart5',
+                            id: 'myChart1',
                             data: LangData,
                         });
                     </script>
