@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'CodeCalender.apps.CodeCalenderConfig',
+    'Compare.apps.CompareConfig',
     'CF_Crawler',
 ]
 

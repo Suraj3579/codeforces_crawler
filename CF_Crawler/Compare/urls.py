@@ -2,5 +2,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.code_calender, name='code_calender'),
+    path('', views.compare, name='compare'),
     ]
