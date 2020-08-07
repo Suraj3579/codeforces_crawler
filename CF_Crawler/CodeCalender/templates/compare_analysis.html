@@ -1,6 +1,6 @@
 {% extends 'index.html'%}
 {% block head %}
-<title>Code Crawler | Analysis</title>
+<title>Code Crawler | Compare_Analysis</title>
 {% endblock %}
 {% block content %}
 {% load tag %}
@@ -9,7 +9,7 @@
 
     <section id="userinfo">
        <div class="screen-box" style="background: #14b5a5">
-        <div class="screen-subtitle" style="padding:80px;">Detailed Information and Analysis of
+        <div class="screen-subtitle" style="padding:80px;">Detailed Information and Analysis for you to compare 
         <div class="screen-title" style="padding:0;"><span>{{ userinfo_list.handle }} and {{ userinfo_list1.handle }}</span></div>
             </div>
        </div>
@@ -20,47 +20,95 @@
         <div class="card h-100 border-info mb-3"  >
             <div class="card-header text-center">User Details</div>
             <div class="row no-gutters">
-                <div class="col-md-4">
+                <div class="col-md-2">
 
                     {% if status %}
-                    <img src="{{ userinfo_list.avatar }}" height="100%" width="100%">
+                    <img src="{{ userinfo_list.avatar }}" height="50%" width="100%">
                     <!--<p>{{ userinfo_list.handle }}</p>-->
                     {%endif%}
                 </div>
                 <div class = 'col-md-8'>
                     <div class="card-body">
-                        {% if status %}
-                        <h4 class="card-title">{{ userinfo_list.handle }}</h4>
-                        <ul>
-                        {% if userinfo_list.firstName%}
-                            <li><h6>FirstName : {{ userinfo_list.firstName }}</h6></li>
-                        {%endif%}
-                        {% if userinfo_list.organization%}
-                            <li><h6>Organisation : {{ userinfo_list.organization }}</h6></li>
-                        {%endif%}
-                        {% if userinfo_list.rating%}
-                            <li><h6>Rating : {{ userinfo_list.rating }}</h6></li>
-                        {%endif%}
-                        {% if userinfo_list.rank%}
-                            <li><h6>Rank : {{ userinfo_list.rank }}</h6></li>
-                        {%endif%}
-                        {% if userinfo_list.maxRating%}
-                            <li><h6>MaxRating : {{ userinfo_list.maxRating }}</h6></li>
-                        {%endif%}
-                        {% if userinfo_list.maxRank%}
-                            <li><h6>MaxRank : {{ userinfo_list.maxRank }}</h6></li>
-                        {%endif%}
-                        {% if userinfo_list.friendOfCount%}
-                            <li><h6>Friends : {{ userinfo_list.friendOfCount }}</h6></li>
-                        {%endif%}
-                            <li><h6>Contests Participated : {{data_dict.noc}}</h6></li>
-                            <li><h6>Total Submissions : {{data_dict.ts}}</h6></li>
-                            <li><h6>Successful Submissions : {{data_dict.ss}}</h6></li>
-                            <li><h6>Maximum Submissions for a Single Question : {{data_dict.msqn}} ({{data_dict.msqc}})</h6></li>
-                            <li><h6>Successful Questions with one Submission : {{data_dict.nqos}}</h6></li>
-                        </ul>
+                    <table class="table table-bordered table-striped ctable">
+                        <thead class="thead dark">
+                        <tr>
+                            <th>Contest Name</th>
+                            <th style="text-align: center;">{{ userinfo_list.handle }}</th>
+                            <th style="text-align: center;">{{ userinfo_list1.handle }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="cname" style="text-align: center;">Firstname</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list.firstName%} {{ userinfo_list.firstName }} {%else%}- {% endif%}</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list1.firstName%} {{ userinfo_list1.firstName }} {%else%}- {% endif%}</td>
+                        </tr>
+                        <tr>
+                            <td class="cname" style="text-align: center;">Organisation</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list.organization%} {{ userinfo_list.organization }} {%else%}- {% endif%}</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list1.organization%} {{ userinfo_list1.organization }} {%else%}- {% endif%}</td>
+                        </tr>
+                        <tr>
+                            <td class="cname" style="text-align: center;">Rating</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list.rating%} {{ userinfo_list.rating }} {%else%}- {% endif%}</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list1.rating%} {{ userinfo_list1.rating }} {%else%}- {% endif%}</td>
+                        </tr>  
+                        <tr>
+                            <td class="cname" style="text-align: center;">Rank</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list.rank%} {{ userinfo_list.rank }} {%else%}- {% endif%}</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list1.rank%} {{ userinfo_list1.rank }} {%else%}- {% endif%}</td>
+                        </tr> 
+                        <tr>
+                            <td class="cname" style="text-align: center;">MaxRating</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list.maxRating%} {{ userinfo_list.maxRating }} {%else%}- {% endif%}</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list1.maxRating%} {{ userinfo_list1.maxRating }} {%else%}- {% endif%}</td>
+                        </tr>   
+                        <tr>
+                            <td class="cname" style="text-align: center;">MaxRank</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list.maxRank%} {{ userinfo_list.maxRank }} {%else%}- {% endif%}</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list1.maxRank%} {{ userinfo_list1.maxRank }} {%else%}- {% endif%}</td>
+                        </tr>    
+                        <tr>
+                            <td class="cname" style="text-align: center;">Friends</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list.friendOfCount%} {{ userinfo_list.friendOfCount }} {%else%}- {% endif%}</td>
+                            <td class="cname" style="text-align: center;">{% if userinfo_list1.friendOfCount%} {{ userinfo_list1.friendOfCount }} {%else%}- {% endif%}</td>
+                        </tr>   
+                        <tr>
+                            <td class="cname" style="text-align: center;">Contests Participated </td>
+                            <td class="cname" style="text-align: center;">{%if data_dict.noc%} {{data_dict.noc}} {%else%}- {% endif%}</td>
+                            <td class="cname" style="text-align: center;">{%if data_dict1.nocs1%} {{data_dict1.noc1}} {%else%}- {% endif%}</td>
+                        </tr> 
+                        <tr>
+                            <td class="cname" style="text-align: center;">Total Submissions </td>
+                            <td class="cname" style="text-align: center;">{%if data_dict.ts%} {{data_dict.ts}} {%else%}- {% endif%}</td>
+                            <td class="cname" style="text-align: center;">{%if data_dict1.ts1%} {{data_dict1.ts1}} {%else%}- {% endif%}</td>
+                        </tr>   
+                        <tr>
+                            <td class="cname" style="text-align: center;">Successful Submissions </td>
+                            <td class="cname" style="text-align: center;">{%if data_dict.ss%} {{data_dict.ss}} {%else%}- {% endif%}</td>
+                            <td class="cname" style="text-align: center;">{%if data_dict1.ss1%} {{data_dict1.ss1}} {%else%}- {% endif%}</td>
+                        </tr> 
+                        <tr>
+                            <td class="cname" style="text-align: center;">Max Submissions for a Single Question </td>
+                            <td class="cname" style="text-align: center;">{%if data_dict.msqn%} {{data_dict.msqn}} ({{data_dict.msqc}}) {%else%}- {% endif%}</td>
+                            <td class="cname" style="text-align: center;">{%if data_dict1.msqn1%} {{data_dict1.msqn1}} ({{data_dict1.msqc1}}) {%else%}- {% endif%}</td>
+                        </tr>  
+                        <tr>
+                            <td class="cname" style="text-align: center;">Successful Questions with one Submission </td>
+                            <td class="cname" style="text-align: center;">{%if data_dict.nqos%} {{data_dict.nqos}} {%else%}- {% endif%}</td>
+                            <td class="cname" style="text-align: center;">{%if data_dict1.nqos1%} {{data_dict1.nqos1}} {%else%}- {% endif%}</td>
+                        </tr>             
+                         </tbody>
+                    </table>
                     </div>
                 </div>
+                <div class="col-md-2">
+
+                    {% if status %}
+                    <img src="{{ userinfo_list1.avatar }}" height="50%" width="100%">
+                    <!--<p>{{ userinfo_list.handle }}</p>-->
+                    {%endif%}
+                </div>                
             </div>
         </div>
         </div>
@@ -353,7 +401,7 @@
         </div>
     </div>
 
-    <div class="card-deck mb-5">
+ <!--  <div class="card-deck mb-5">
         <div class="col-12" >
             <div class="card h-100 border-info mb-3">
                 <div class="card-header text-center">Day-wise Submissions</div>
@@ -610,7 +658,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="card-deck mb-5">
         <div class="col-12" >
             <div class="card h-100 border-info mb-3">
@@ -812,9 +860,7 @@
         </div>
     </div>
 
-    {% else %}
-        <h4>User Not Found</h4>
-    {% endif %}
+    
     
     </div>
     </section>
