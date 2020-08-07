@@ -96,10 +96,11 @@
                                 }
                             },
                             "scale-x": {
-                                "labels": "{{dtime}}" ,
-                                "label": { /* Add a scale title with a label object. */
-                                    "text": "Dates"
-                                        }
+                                step: 'month',
+                                transform: {
+                                    type: 'date',
+                                    all: "%M'%y"
+                                }
                             },
 
                             "scale-y": {
@@ -151,7 +152,7 @@
                                 }
                             },
                             "series": [{
-                                "values": {{rating}} ,
+                                "values": {{nlist}} ,
                                 "text": "Rating",
                                 "line-color": "#007790",
                                 "legend-item": {

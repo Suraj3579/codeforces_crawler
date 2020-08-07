@@ -145,10 +145,11 @@
                                 }
                             },
                             "scale-x": {
-                                "labels": "{{dtime}}" ,
-                                "label": { /* Add a scale title with a label object. */
-                                    "text": "Dates"
-                                        }
+                                step: 'month',
+                                transform: {
+                                    type: 'date',
+                                    all: "%M'%y"
+                                }
                             },
 
                             "scale-y": {
@@ -200,7 +201,7 @@
                                 }
                             },
                             "series": [{
-                                "values": {{rating}} ,
+                                "values": {{nlist}} ,
                                 "text": "{{ userinfo_list.handle }}",
                                 "line-color": "#007790",
                                 "legend-item": {
@@ -224,7 +225,7 @@
 
                                 },
                                 {
-                                "values": {{rating1}},
+                                "values": {{nlist1}},
                                 "text": "{{ userinfo_list1.handle }}",
                             "line-color": "#009872",
                             "legend-item": {

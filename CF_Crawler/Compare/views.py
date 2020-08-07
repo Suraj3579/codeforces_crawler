@@ -136,9 +136,16 @@ def compare_analysis(request):
                 rtime.append(item['ratingUpdateTimeSeconds'])
             dtime = []
             for i in rtime:
-                dtime.append(datetime.fromtimestamp(i).strftime("%d %b'%y"))
+                dtime.append(i*1000)
 
-            # print("user found")
+            nlist=[]
+            for i in range(len(dtime)):
+                templist=[]
+                templist.append(dtime[i])
+                templist.append(rating[i])
+                nlist.append(templist)
+
+            #print(nlist)
             status1 = True
             userinfo_list1 = userinfo_list1["result"]
             userinfo_list1 = userinfo_list1[0]
@@ -232,11 +239,18 @@ def compare_analysis(request):
 
             for item in useranalysis1:
                 rtime1.append(item['ratingUpdateTimeSeconds'])
-            dtime1= []
+            dtime1 = []
             for i in rtime1:
-                dtime1.append(datetime.fromtimestamp(i).strftime("%d %b'%y"))
+                dtime1.append(i*1000)
 
-            # print(dtime)
+            nlist1=[]
+            for i in range(len(dtime1)):
+                templist1=[]
+                templist1.append(dtime1[i])
+                templist1.append(rating1[i])
+                nlist1.append(templist1)
+
+            #print(nlist)
             context1 = {'userinfo_list1': userinfo_list1, 'status1': status1,
                         'tagcount1': tagcount1, 'langcount1': langcount1, 'ABC_tagcount1': ABC_tagcount1,
                         'problem_ratingcount1': problem_ratingcount1,
@@ -244,7 +258,7 @@ def compare_analysis(request):
                         'userinfo_list': userinfo_list, 'status': status,
                         'tagcount': tagcount, 'langcount': langcount, 'ABC_tagcount': ABC_tagcount,
                         'problem_ratingcount': problem_ratingcount,
-                        'dtime': dtime, 'rating': rating, 'verdict_count': verdict_count, 'data_dict': data_dict,'datecount': datecount, 'ok_count': len(ok_submissions), 'datecount1': datecount1, 'ok_count1': len(ok_submissions1),
+                        'dtime': dtime, 'rating': rating, 'verdict_count': verdict_count, 'data_dict': data_dict,'datecount': datecount, 'ok_count': len(ok_submissions), 'datecount1': datecount1, 'ok_count1': len(ok_submissions1), 'nlist':nlist, 'nlist1':nlist1
                         }
             # return HttpResponseRedirect('/userhandle')
     else:

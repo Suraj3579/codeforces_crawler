@@ -199,7 +199,7 @@ def user_handle(request):
             rating = []
             rtime = []
             rank = []
-
+            nlist=[]
             u = requests.get('https://codeforces.com/api/user.rating?handle=' + form)
             useranalysis3 = u.json()
             useranalysis3 = useranalysis3["result"]
@@ -210,14 +210,23 @@ def user_handle(request):
                 rtime.append(item['ratingUpdateTimeSeconds'])
             dtime = []
             for i in rtime:
-                dtime.append(datetime.fromtimestamp(i).strftime("%d %b'%y"))
+                dtime.append(i*1000)
+
+            nlist=[]
+            for i in range(len(dtime)):
+                templist=[]
+                templist.append(dtime[i])
+                templist.append(rating[i])
+                nlist.append(templist)
+
+            #print(nlist)
 
             # print(dtime)
             context1 = {'userinfo_list': userinfo_list, 'status': status,
                         'tagcount': tagcount, 'langcount': langcount, 'ABC_tagcount': ABC_tagcount,
                         'problem_ratingcount': problem_ratingcount,
                         'dtime': dtime, 'rating': rating, 'verdict_count': verdict_count, 'data_dict': data_dict,
-                        'datecount': datecount, 'ok_count': len(ok_submissions)}
+                        'datecount': datecount, 'ok_count': len(ok_submissions), 'nlist':nlist}
             # return HttpResponseRedirect('/userhandle')
     else:
         form = UserHandle()
