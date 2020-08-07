@@ -1,0 +1,821 @@
+{% extends 'index.html'%}
+{% block head %}
+<title>Code Crawler | Analysis</title>
+{% endblock %}
+{% block content %}
+{% load tag %}
+{% load static %}
+    <script src=" {% static '/js/zingchart.min.js' %}"></script>
+
+    <section id="userinfo">
+       <div class="screen-box" style="background: #14b5a5">
+        <div class="screen-subtitle" style="padding:80px;">Detailed Information and Analysis of
+        <div class="screen-title" style="padding:0;"><span>{{ userinfo_list.handle }} and {{ userinfo_list1.handle }}</span></div>
+            </div>
+       </div>
+
+    <div class = "container">
+    <div class="card-deck mb-5">
+        <div class="col-md-12">
+        <div class="card h-100 border-info mb-3"  >
+            <div class="card-header text-center">User Details</div>
+            <div class="row no-gutters">
+                <div class="col-md-4">
+
+                    {% if status %}
+                    <img src="{{ userinfo_list.avatar }}" height="100%" width="100%">
+                    <!--<p>{{ userinfo_list.handle }}</p>-->
+                    {%endif%}
+                </div>
+                <div class = 'col-md-8'>
+                    <div class="card-body">
+                        {% if status %}
+                        <h4 class="card-title">{{ userinfo_list.handle }}</h4>
+                        <ul>
+                        {% if userinfo_list.firstName%}
+                            <li><h6>FirstName : {{ userinfo_list.firstName }}</h6></li>
+                        {%endif%}
+                        {% if userinfo_list.organization%}
+                            <li><h6>Organisation : {{ userinfo_list.organization }}</h6></li>
+                        {%endif%}
+                        {% if userinfo_list.rating%}
+                            <li><h6>Rating : {{ userinfo_list.rating }}</h6></li>
+                        {%endif%}
+                        {% if userinfo_list.rank%}
+                            <li><h6>Rank : {{ userinfo_list.rank }}</h6></li>
+                        {%endif%}
+                        {% if userinfo_list.maxRating%}
+                            <li><h6>MaxRating : {{ userinfo_list.maxRating }}</h6></li>
+                        {%endif%}
+                        {% if userinfo_list.maxRank%}
+                            <li><h6>MaxRank : {{ userinfo_list.maxRank }}</h6></li>
+                        {%endif%}
+                        {% if userinfo_list.friendOfCount%}
+                            <li><h6>Friends : {{ userinfo_list.friendOfCount }}</h6></li>
+                        {%endif%}
+                            <li><h6>Contests Participated : {{data_dict.noc}}</h6></li>
+                            <li><h6>Total Submissions : {{data_dict.ts}}</h6></li>
+                            <li><h6>Successful Submissions : {{data_dict.ss}}</h6></li>
+                            <li><h6>Maximum Submissions for a Single Question : {{data_dict.msqn}} ({{data_dict.msqc}})</h6></li>
+                            <li><h6>Successful Questions with one Submission : {{data_dict.nqos}}</h6></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>    
+    <div class="card-deck mb-5">
+        <div class="col-12" >
+            <div class="card h-100 border-info mb-3">
+                <div class="card-header text-center">Rating</div>
+                <div class="card-body" id="myChart2">
+                    <script>
+                        var Ratinggraph = {
+                            "type": "line",
+
+                            /*"title": {
+                                "text": "Rating",
+                                "font-size": "24px",
+                                "adjust-layout": true
+                            },*/
+                            "plotarea": {
+                                "margin": "dynamic 45 60 dynamic",
+                            },
+                            "legend": {
+                                "layout": "float",
+                                "background-color": "none",
+                                "border-width": 0,
+                                "shadow": 0,
+                                "align": "center",
+                                "adjust-layout": true,
+                                "toggle-action": "remove",
+                                "item": {
+                                "padding": 7,
+                                "marginRight": 17,
+                                "cursor": "hand"
+                                }
+                            },
+                            "scale-x": {
+                                "labels": "{{dtime}}" ,
+                                "label": { /* Add a scale title with a label object. */
+                                    "text": "Dates"
+                                        }
+                            },
+
+                            "scale-y": {
+                                "line-color": "#f6f7f8",
+                                "shadow": 0,
+                                "guide": {
+                                "line-style": "dashed"
+                                },
+                                "label": {
+                                "text": "Rating",
+                                },
+                                "minor-ticks": 0,
+                                "thousands-separator": ","
+                            },
+                            "crosshair-x": {
+                                "line-color": "#efefef",
+                                "plot-label": {
+                                "border-radius": "5px",
+                                "border-width": "1px",
+                                "border-color": "#f6f7f8",
+                                "padding": "10px",
+                                "font-weight": "bold"
+                                },
+                                "scale-label": {
+                                "font-color": "#000",
+                                "background-color": "#f6f7f8",
+                                "border-radius": "5px"
+                                }
+                            },
+                            "tooltip": {
+                                "visible": false
+                            },
+                            "plot": {
+                                "highlight": true,
+                                "tooltip-text": "%t views: %v<br>%k",
+                                "shadow": 0,
+                                "line-width": "2px",
+                                "marker": {
+                                "type": "circle",
+                                "size": 3
+                                },
+                                "highlight-state": {
+                                "line-width": 3
+                                },
+                                "animation": {
+                                "effect": 1,
+                                "sequence": 2,
+                                "speed": 100,
+                                }
+                            },
+                            "series": [{
+                                "values": {{rating}} ,
+                                "text": "{{ userinfo_list.handle }}",
+                                "line-color": "#007790",
+                                "legend-item": {
+                                    "background-color": "#007790",
+                                    "borderRadius": 5,
+                                    "font-color": "white"
+                                },
+                                "legend-marker": {
+                                    "visible": false
+                                },
+                                "marker": {
+                                    "background-color": "#007790",
+                                    "border-width": 1,
+                                    "shadow": 0,
+                                    "border-color": "#69dbf1"
+                                },
+                                "highlight-marker": {
+                                    "size": 6,
+                                    "background-color": "#007790",
+                                }
+
+                                },
+                                {
+                                "values": {{rating1}},
+                                "text": "{{ userinfo_list1.handle }}",
+                            "line-color": "#009872",
+                            "legend-item": {
+                                "background-color": "#009872",
+                                "borderRadius": 5,
+                                "font-color": "white"
+                            },
+                            "legend-marker": {
+                                "visible": false
+                            },
+                            "marker": {
+                                "background-color": "#009872",
+                                "border-width": 1,
+                                "shadow": 0,
+                                "border-color": "#69f2d0"
+                            },
+                            "highlight-marker": {
+                                "size": 6,
+                                "background-color": "#009872",
+                            }
+                            }
+                            ]
+                            };
+
+                            zingchart.render({
+                            id: 'myChart2',
+                            data: Ratinggraph,
+
+                            });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-deck mb-5">
+        <div class = "col-12">
+            <div class="card h-100 border-info mb-3">
+                <div class="card-header text-center">Submissions</div>
+                <div class="card-body" id="myChart">
+
+                    <script>
+
+                        var SubmissionData = {
+                            
+                            "layout": "1x2",
+                            "graphset":[{
+                            "type" : "pie3d",   
+                            "scale": {
+                                   "size-factor": 0.5
+                            },
+
+                            plot: {
+                                tooltip: {
+                                text: "%t<br>%npv%<br>%v"
+                                },
+
+
+                                //to order pie slices by size and have reference angle start at zero.
+
+                            },
+                            /*title : {
+                            text : "Submissions"
+                            },*/
+                            series: [
+                                    {% for tag in tagcount %}
+                                    {% get_count tagcount tag as lol %}
+                                    { values: {{lol}}, text : "{{tag}}"} {% if not forloop.last %},{% endif %}
+                                    {% endfor %}
+                            ]
+
+                        },
+                        {
+                            "type" : "pie3d",   
+                            "scale": {
+                                   "size-factor": 0.5
+                            },
+
+                            plot: {
+                                tooltip: {
+                                text: "%t<br>%npv%<br>%v"
+                                },
+
+
+                                //to order pie slices by size and have reference angle start at zero.
+
+                            },
+                            /*title : {
+                            text : "Submissions"
+                            },*/
+                            series: [
+                                    {% for tag in tagcount1 %}
+                                    {% get_count tagcount1 tag as lol %}
+                                    { values: {{lol}}, text : "{{tag}}"} {% if not forloop.last %},{% endif %}
+                                    {% endfor %}
+                            ]
+
+                        }
+                        ]
+                        }
+
+                        zingchart.render({
+                            id: 'myChart',
+                            data: SubmissionData,
+                        });
+                    </script>
+
+                </div>
+
+            </div>
+        </div>
+    </div> 
+    <div class="card-deck mb-5">   
+        <div class="col-12" >
+            <div class="card h-100 border-info mb-3">
+                <div class="card-header text-center">Verdict of the Submissions</div>
+                <div class="card-body" id="myChart5">
+                    <script>
+                        var LangData = {
+                            
+                            "layout": "1x2",
+                            "graphset": [{
+                            "type" : "pie3d",    
+                            "scale": {
+                                   "size-factor": 0.5
+                            },
+                            plot: {
+                                tooltip: {
+                                text: "%t<br>%npv%<br>%v"
+                                },
+
+                            },
+                            /*title : {
+                            text : "Verdict of the Submissions"
+                            },*/
+                            series: [
+                                    {% for v in verdict_count %}
+                                    {% get_vcount verdict_count v as vil %}
+                                    { values: {{vil}}, text : "{{v}}"} {% if not forloop.last %},{% endif %}
+                                    {% endfor %}
+                            ]
+                        },
+                        {
+                            "type" : "pie3d",    
+                            "scale": {
+                                   "size-factor": 0.5
+                            },
+                            plot: {
+                                tooltip: {
+                                text: "%t<br>%npv%<br>%v"
+                                },
+
+                            },
+                            /*title : {
+                            text : "Verdict of the Submissions"
+                            },*/
+                            series: [
+                                    {% for v in verdict_count1 %}
+                                    {% get_vcount verdict_count1 v as vil %}
+                                    { values: {{vil}}, text : "{{v}}"} {% if not forloop.last %},{% endif %}
+                                    {% endfor %}
+                            ]
+                        }
+                        ]
+                        }
+
+                        zingchart.render({
+                            id: 'myChart5',
+                            data: LangData,
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-deck mb-5">
+        <div class="col-12" >
+            <div class="card h-100 border-info mb-3">
+                <div class="card-header text-center">Day-wise Submissions</div>
+                <div class="card-body" id="heatmap">
+                    <script>
+                        var myConfig = {
+                        "layout": "1x2",
+                        "graphset":[{
+                        type: 'calendar',
+                        options: {
+                          year: {
+                            text: '2020',
+                            visible: true
+                          },
+                          startMonth: 1,
+                          endMonth: 8,
+                          palette: ['none', '#2196F3'],
+                          month: {
+                            item: {
+                              fontColor: 'gray',
+                              fontSize: 9
+                            }
+                          },
+                          weekday: {
+                            values: ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                            item: {
+                              fontColor: 'gray',
+                              fontSize: 9
+                            }
+                          },
+                          values:[
+                              {% for date in datecount %}
+                              {% date_count datecount date as lil %}
+                              [ ' {{ date }} ' , {{lil}} ] {% if not forloop.last %},{% endif %}
+                              {%endfor%}
+                          ]
+                        },
+                        labels: [{ //Lefthand Label (container portion)
+                            borderColor: 'gray',
+                            borderWidth: 1,
+                            x: '8%',
+                            y: '60%',
+                            width: '40%',
+                            height: '30%'
+                          },
+                          { //Lefthand Label (top portion)
+                            text: 'Daily Contribution',
+                            fontColor: '#212121',
+                            textAlign: 'center',
+                            x: '10%',
+                            y: '65%',
+                            width: '36%'
+                          },
+                          { //Lefthand Label (middle portion)
+                            text: '%plot-value',
+                            fontColor: '#2196F3',
+                            fontFamily: 'Georgia',
+                            fontSize: 35,
+                            textAlign: 'center',
+                            x: '10%',
+                            y: '68%',
+                            width: '36%'
+                          },
+                          // Note: the bottom portion of the Bottom-Left Label is the fixed tooltip, below.
+
+                          { //Rightside Label (container portion)
+                            borderColor: 'gray',
+                            borderWidth: 1,
+                            x: '52%',
+                            y: '60%',
+                            width: '40%',
+                            height: '30%',
+                          },
+                          { //Rightside Label (top portion)
+                            text: 'Total accepted Submissions ',
+                            fontColor: '#212121',
+                            textAlign: 'center',
+                            x: '54%',
+                            y: '65%',
+                            width: '36%'
+                          },
+                          { //Rightside Label (middle portion)
+                            text: '{{ok_count}}',
+                            fontColor: '#2196F3',
+                            fontFamily: 'Georgia',
+                            fontSize: 35,
+                            textAlign: 'center',
+                            x: '54%',
+                            y: '68%',
+                            width: '36%'
+                          },
+                          { //Rightside Label (bottom portion)
+                            text: 'Jan 1 - Aug 30',
+                            fontColor: '#212121',
+                            padding: 2,
+                            textAlign: 'center',
+                            x: '54%',
+                            y: '80%',
+                            width: '36%'
+                          }
+                        ],
+
+                        tooltip: { //Lefthand Label (bottom portion)
+                          text: '%data-day',
+                          backgroundColor: 'none',
+                          borderColor: 'none',
+                          fontColor: '#212121',
+                          padding: 2,
+                          //textAlign: 'center',
+                          align: 'center',
+                          sticky: true,
+                          timeout: 30000,
+                          x: '10%',
+                          y: '80%',
+                          width: '36%'
+                        },
+
+                        plotarea: {
+                          marginTop: '15%',
+                          marginBottom: '55%',
+                          marginLeft: '8%',
+                          marginRight: '8%'
+                        }
+                      },
+                      {
+                        type: 'calendar',
+                        options: {
+                          year: {
+                            text: '2020',
+                            visible: true
+                          },
+                          startMonth: 1,
+                          endMonth: 8,
+                          palette: ['none', '#2196F3'],
+                          month: {
+                            item: {
+                              fontColor: 'gray',
+                              fontSize: 9
+                            }
+                          },
+                          weekday: {
+                            values: ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                            item: {
+                              fontColor: 'gray',
+                              fontSize: 9
+                            }
+                          },
+                          values:[
+                              {% for date in datecount1 %}
+                              {% date_count datecount1 date as lil %}
+                              [ ' {{ date }} ' , {{lil}} ] {% if not forloop.last %},{% endif %}
+                              {%endfor%}
+                          ]
+                        },
+                        labels: [{ //Lefthand Label (container portion)
+                            borderColor: 'gray',
+                            borderWidth: 1,
+                            x: '8%',
+                            y: '60%',
+                            width: '40%',
+                            height: '30%'
+                          },
+                          { //Lefthand Label (top portion)
+                            text: 'Daily Contribution',
+                            fontColor: '#212121',
+                            textAlign: 'center',
+                            x: '10%',
+                            y: '65%',
+                            width: '36%'
+                          },
+                          { //Lefthand Label (middle portion)
+                            text: '%plot-value',
+                            fontColor: '#2196F3',
+                            fontFamily: 'Georgia',
+                            fontSize: 35,
+                            textAlign: 'center',
+                            x: '10%',
+                            y: '68%',
+                            width: '36%'
+                          },
+                          // Note: the bottom portion of the Bottom-Left Label is the fixed tooltip, below.
+
+                          { //Rightside Label (container portion)
+                            borderColor: 'gray',
+                            borderWidth: 1,
+                            x: '52%',
+                            y: '60%',
+                            width: '40%',
+                            height: '30%',
+                          },
+                          { //Rightside Label (top portion)
+                            text: 'Total accepted Submissions ',
+                            fontColor: '#212121',
+                            textAlign: 'center',
+                            x: '54%',
+                            y: '65%',
+                            width: '36%'
+                          },
+                          { //Rightside Label (middle portion)
+                            text: '{{ok_count}}',
+                            fontColor: '#2196F3',
+                            fontFamily: 'Georgia',
+                            fontSize: 35,
+                            textAlign: 'center',
+                            x: '54%',
+                            y: '68%',
+                            width: '36%'
+                          },
+                          { //Rightside Label (bottom portion)
+                            text: 'Jan 1 - Aug 30',
+                            fontColor: '#212121',
+                            padding: 2,
+                            textAlign: 'center',
+                            x: '54%',
+                            y: '80%',
+                            width: '36%'
+                          }
+                        ],
+
+                        tooltip: { //Lefthand Label (bottom portion)
+                          text: '%data-day',
+                          backgroundColor: 'none',
+                          borderColor: 'none',
+                          fontColor: '#212121',
+                          padding: 2,
+                          //textAlign: 'center',
+                          align: 'center',
+                          sticky: true,
+                          timeout: 30000,
+                          x: '10%',
+                          y: '80%',
+                          width: '36%'
+                        },
+
+                        plotarea: {
+                          marginTop: '15%',
+                          marginBottom: '55%',
+                          marginLeft: '8%',
+                          marginRight: '8%'
+                        }
+                      }
+                      ]
+                        }
+                      zingchart.MODULESDIR="{% static '/js/zingchart-modules/' %}";
+                      zingchart.loadModules('calendar', function() {
+                        zingchart.render({
+                          id: 'heatmap',
+                          data: myConfig,
+                          height: '100%',
+                          width: '100%'
+                        });
+                      });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-deck mb-5">
+        <div class="col-12" >
+            <div class="card h-100 border-info mb-3">
+                <div class="card-header text-center">Languages</div>
+                <div class="card-body" id="myChart1">
+                    <script>
+                        var LangData = {
+                            
+                            "layout": "1x2",
+                            "graphset":[{
+                            "type" : "pie3d",   
+                            "scale": {
+                                   "size-factor": 0.5
+                            },
+                            plot: {
+                                tooltip: {
+                                text: "%t<br>%npv%<br>%v"
+                                },
+
+                            },
+                            /*title : {
+                            text : "Languages"
+                            },*/
+                            series: [
+                                    {% for l in langcount %}
+                                    {% get_count langcount l as lil %}
+                                    { values: {{lil}}, text : "{{l}}"} {% if not forloop.last %},{% endif %}
+                                    {% endfor %}
+                            ]
+
+                        },
+                        {
+                            
+                            "type" : "pie3d",   
+                            "scale": {
+                                   "size-factor": 0.5
+                            },
+                            plot: {
+                                tooltip: {
+                                text: "%t<br>%npv%<br>%v"
+                                },
+
+                            },
+                            /*title : {
+                            text : "Languages"
+                            },*/
+                            series: [
+                                    {% for l in langcount1 %}
+                                    {% get_count langcount1 l as lil %}
+                                    { values: {{lil}}, text : "{{l}}"} {% if not forloop.last %},{% endif %}
+                                    {% endfor %}
+                            ]
+
+                        }
+                        ]
+                        }
+
+                        zingchart.render({
+                            id: 'myChart1',
+                            data: LangData,
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-deck mb-5">
+        <div class="col-12" >
+            <div class="card h-100 border-info mb-3">
+                <div class="card-header text-center">No. Of Problems Solved vs Problem Level</div>
+                <div class="card-body" id="ABC_tag_bar">
+                    <script>
+                    var ABC_tag_data={
+                        type: 'bar',
+                        plotarea: {
+                            'adjust-layout': false
+                        },
+                        /* "title": {
+                            "text": "No. Of Problems Solved vs Problem Level",
+                            "font-color": "#8993c7",
+                            "backgroundColor": "none",
+                            "font-size": "22px",
+                            "alpha": 1,
+                            "adjust-layout": false,
+                        },*/
+                        "plot": {
+                            "bars-space-left": 0.15,
+                            "bars-space-right": 0.15,
+                            "animation": {
+                                "effect": "ANIMATION_SLIDE_BOTTOM",
+                                "sequence": 0,
+                                "speed": 800,
+                                "delay": 800
+                            }
+                        },
+                        'scale-x': {
+                            label: { /* Scale Title */
+                                text: "Problem Levels",
+                            },
+                             labels: [{% for x in ABC_tagcount %}
+                             "{{x}}" {% if not forloop.last %},{% endif %}
+                             {% endfor %}]
+                        },
+                        'scale-y': {
+                            label: {
+                                text: "No. of Problems"
+                            }
+                        },
+                        series: [
+                        {
+                            values:[{% for l in ABC_tagcount %}
+                                {% get_ABC_count ABC_tagcount l as yoyo %}
+                                {{yoyo}} {% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                            ]
+                        },
+                        {
+                            values:[{% for l in ABC_tagcount1 %}
+                                {% get_ABC_count ABC_tagcount1 l as yoyo %}
+                                {{yoyo}} {% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                            ]
+                        }]
+                    }
+                    zingchart.render({
+                    id: 'ABC_tag_bar',
+                    data: ABC_tag_data,});
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-deck mb-5">    
+        <div class="col-12" >
+            <div class="card h-100 border-info mb-3">
+                <div class="card-header text-center">No. Of Problems Solved vs Problem Rating</div>
+                <div class="card-body" id="problem_rating_bar">
+                    <script>
+                    var problem_rating_data={
+                        type: 'bar',
+                        /*"title": {
+                            "text": "No. Of Problems Solved vs Problem Rating",
+                            "font-color": "#2da4cc",
+                            "backgroundColor": "none",
+                            "font-size": "22px",
+                            "alpha": 1,
+                            "adjust-layout": true,
+                        },*/
+                        plotarea: {
+                            'adjust-layout': true
+                        },
+                        "plot": {
+                            "bars-space-left": 0.15,
+                            "bars-space-right": 0.15,
+                            "animation": {
+                                "effect": "ANIMATION_SLIDE_BOTTOM",
+                                "sequence": 0,
+                                "speed": 800,
+                                "delay": 800
+                            }
+                        },
+                        'scale-x': {
+                            label: { /* Scale Title */
+                                text: "Problems Rating",
+                            },
+                             labels: [{% for x in problem_ratingcount %}
+                             "{{x}}" {% if not forloop.last %},{% endif %}
+                             {% endfor %}]
+                        },
+                        'scale-y': {
+                            label: {
+                                text: "No. of Problems"
+                            }
+                        },
+                        series: [
+                        {
+                            values:[{% for l in problem_ratingcount %}
+                                {% get_ABC_count problem_ratingcount l as yoyo %}
+                                {{yoyo}} {% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                            ]
+                        },
+                        {
+                            values:[{% for l in problem_ratingcount1 %}
+                                {% get_ABC_count problem_ratingcount1 l as yoyo %}
+                                {{yoyo}} {% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                            ]                            
+                        }
+                        
+                        ]
+                    }
+                    zingchart.render({
+                    id: 'problem_rating_bar',
+                    data: problem_rating_data,});
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+        <h4>User Not Found</h4>
+    {% endif %}
+    
+    </div>
+    </section>
+{% endblock %}
