@@ -224,7 +224,7 @@ def compare_analysis(request):
             msqn1 = max(ques_count1.keys(),
                        key=(lambda k: ques_count1[k]))  # name of the question with maximum submissions
             msqc1 = ques_count1[msqn1]  # max submissions per question
-            data_dict1 = {'msqn1': msqn1, 'msqc1': msqc1, 'nqos': nqos1, 'ts1': ts1, 'ss1': ss1, 'noc1': noc1}
+            data_dict1 = {'msqn1': msqn1, 'msqc1': msqc1, 'nqos1': nqos1, 'ts1': ts1, 'ss1': ss1, 'noc1': noc1}
 
             rating1 = []
             rtime1 = []
