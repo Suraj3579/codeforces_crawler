@@ -29,21 +29,22 @@ def compare_analysis(request):
         u1 = requests.get(('https://codeforces.com/api/user.info?handles=' + form1))
         userinfo_list1 = u1.json()
         status1 = userinfo_list1['status']        
-        if (status != 'OK' and status1 != 'OK'):
-            # print("user not found")
+        if (status == 'FAILED' or status1 == 'FAILED'):
             status = False
             userinfo_list = userinfo_list['comment']
-            # print("yoyo " + userinfo_list)
-            # print("user not found")
             status1 = False
             userinfo_list1 = userinfo_list1['comment']
-            # print("yoyo " + userinfo_list1)
+            #print("yoyo " + userinfo_list1)
 
         else:
             # print("user found")
             status = True
             userinfo_list = userinfo_list["result"]
             userinfo_list = userinfo_list[0]
+
+            status1 = True
+            userinfo_list1 = userinfo_list1["result"]
+            userinfo_list1 = userinfo_list1[0]
 
             # ---------code for anylasis page
             tag = []
@@ -146,9 +147,7 @@ def compare_analysis(request):
                 nlist.append(templist)
 
             #print(nlist)
-            status1 = True
-            userinfo_list1 = userinfo_list1["result"]
-            userinfo_list1 = userinfo_list1[0]
+
 
             # ---------code for anylasis page
             tag1 = []
